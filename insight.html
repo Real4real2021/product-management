@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Insight</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+
+</head>
+<body>
+    <a href="index.html">Dashboard</a>
+    <a href="insight.html">Insight</a>
+    <div class="main-content">
+        <h1>Product Management Dashboard</h1>
+        <h2>Product Insight</h2>
+        <p>Product 1</p>
+        <p>Product 2</p>
+        <p>Product 3</p>
+        <p>Product 4</p>
+        <input type="button" value="cogs Graph" id="render-cogs">
+        <input type="button" value="Resource Utilization Graph" id="render-resource-utilization">
+        <input type="button" value="Inventory Graph" id="render-inventory">
+        <input type="button" value="Production Sales Graph" id="render-production-sales">
+        <div id="product-list">
+            <canvas id="cogsChart"> </canvas>
+            <canvas id="resourceUtilizationChart"> </canvas>
+            <canvas id="inventoryChart"> </canvas>
+            <canvas id="productionSalesChart"> </canvas>
+        </div>
+    </div>
+    <input type="button" value="test" id="test">
+    
+    <script type="module" src="scripts/insight.js"></script>
+</body>
+</html>

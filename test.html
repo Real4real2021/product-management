@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management System</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --light-grey: #f5f5f5;
+            --dark-grey: #333;
+            --black: #000;
+            --accent: #4CAF50;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-grey);
+            background-color: var(--light-grey);
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 95%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--dark-grey);
+            color: var(--light-grey);
+            padding: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+        }
+        nav a {
+            color: var(--light-grey);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: var(--accent);
+        }
+        h1, h2, h3 {
+            color: var(--black);
+        }
+        .form-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .form-section h3 {
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--dark-grey);
+            border-radius: 4px;
+        }
+        input[type="button"] {
+            background-color: var(--accent);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #45a049;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+            nav {
+                flex-direction: column;
+            }
+            nav a {
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html">Dashboard</a>
+            <a href="insight.html">Insight</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Product Management Dashboard</h1>
+        <div class="form-section">
+            <label for="product-code">Product Code:</label>
+            <input type="text" name="code" id="product-code">
+        </div>
+        <h2>Add Product</h2>
+        <div id="product-form">
+            <div class="form-section">
+                <h3>Raw Materials</h3>
+                <label for="quantity">Quantity:</label>
+                <input type="text" id="quantity" name="quantity">
+                <label for="cost">Cost:</label>
+                <input type="text" id="cost" name="cost">
+                <label for="supplier">Supplier:</label>
+                <input type="text" id="supplier" name="supplier">
+                <label for="lead-time">Lead Time:</label>
+                <input type="text" id="lead-time" name="lead-time">
+            </div>
+            <div class="form-section">
+                <h3>Labor</h3>
+                <label for="hours-per-unit">Hours Per Unit:</label>
+                <input type="text" id="hours-per-unit" name="hours-per-unit">
+                <label for="labor-cost-per-hour">Labor Cost Per Hour:</label>
+                <input type="text" id="labor-cost-per-hour" name="labor-cost-per-hour">
+                <label for="skill-level-selector">Skill Level:</label>
+                <select name="skill-level-selector" id="skill-level-selector">
+                    <option value="unskilled">Unskilled</option>
+                    <option value="skilled">Skilled</option>
+                    <option value="specialized">Specialized</option>
+                </select>
+            </div>
+            <!-- Add more form sections here for Equipment & Machinery, Energy Consumption, etc. -->
+        </div>
+        <input type="button" value="Add Product" id="add-product">
+    </div>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
