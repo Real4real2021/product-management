@@ -1,3 +1,133 @@
+const costOfGoodsSoldForGross =  "";
+const population = "";
+const targetMarketPercentage = "";
+const benefits = "";
+const costs  = "";
+const averageMonthlyRevenuePerUser = "";
+const averageUserLifespanInMonths = "";
+const grossMargin = "";
+const profit = "";
+const percentChangeInQuantityDemanded = "";
+const percentChangeInPrice = "";
+const sellingPrice = "";
+const variableCost = "";
+const marketingCosts = "";
+const numberOfNewCustomers = "";
+const clv = "";
+const averageRetention = "";
+const numberOfLostCustomers = "";
+const totalNumberOfCustomers = "";
+const yourCompanyMetric = "";
+const industryMetric = "";
+const revenue = "";
+const costOfGoodsSold = "";
+const totalRevenue  = "";
+const numberOfOrders = "";
+const marketingSpend = "";
+const retainedCustomers = "";
+const initialCustomers = "";
+const percentPromoters = "";
+const percentDetractors = "";
+const completedActions = "";
+const totalVisitors = "";
+const percentSatisfied = "";
+const percentDissatisfied = "";
+const revenueFromAds = "";
+const costOfAdSpend = "";
+const totalClicks = "";
+const numberOfUsers = "";
+const cac = "";
+const averageInventoryValue = "";
+const ordersWithDefects = "";
+const totalOrders = "";
+const numberOfEmployees = "";
+const operatingIncome = "";
+const depreciationAmortization = "";
+const cashFromOperations = "";
+const capitalExpenditures = "";
+const totalLiabilities = "";
+const totalShareholdersEquity = "";
+const TotalCosts = "";
+const TotalNumberOfNewCustomers = ""; 
+const percentSatisfiedCustomers = ""; 
+const percentDissatisfiedCustomers = "";
+const yourCompanyConversionRate = ""; 
+const industryAverageConversionRate = ""; 
+const customerLifetimeValue = ""; 
+const customerAcquisitionCost = ""; 
+const totalRevenueForPeriod = ""; 
+const numberOfUsersForPeriod = ""; 
+const completedPurchasesFromEmail = ""; 
+const totalEmailClicks = ""; 
+
+function loading() {
+  console.log("loading");
+}
+
+let skipLoading = false;
+
+async function post(url, data, options = {}) {
+  const { timeout = 8000 } = options;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  if (!url.includes("notifications")) {
+    if (!skipLoading) loading();
+    const responseText = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      ...options,
+      body: JSON.stringify(data),
+    });
+    clearTimeout(id);
+    if (!skipLoading) loading();
+    if (skipLoading) skipLoading = false;
+    return responseText.json();
+  }
+  const responseText = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  }).catch((error) => {
+    console.log(error);
+  });
+  if (skipLoading) skipLoading = false;
+  return responseText.json();
+}
+
+async function checkTables() {
+  const response = await fetch("exec/create.php");
+  const result = await response.json();
+  console.log(result); 
+  return result.success; 
+}
+
+async function retData(){
+  const response = await fetch("function/readProducts.php");
+  const mockData = await response.json()
+
+
+  return mockData
+}
+
+// retData().then(data =>{
+//   const totalCosts = data.totalCosts
+//   console.log(totalCosts);
+// })
+
+// const addButton = document.getElementById('Add')
+
+// addButton.addEventListener('click', ()=>{
+//   console.log(mockData);
+// })
+
+checkTables();
+
 const MSEButton = document.getElementById("market-size-estimation")
 const CBAButton= document.getElementById("cost-benefit-analysis")
 const CLVButton= document.getElementById("customer-lifetime-value")
@@ -119,8 +249,6 @@ function estimateMarketSize(population, targetMarketPercentage) {
   return marketSize;
 }
 
-const population = 1000000;
-const targetMarketPercentage = 25;
 
 MSEButton.addEventListener("click", ()=>{
   const estimatedSize = estimateMarketSize(population, targetMarketPercentage);
@@ -155,8 +283,6 @@ function calculateCostBenefitAnalysis(benefits, costs) {
   return costBenefitRatio;
 }
 
-const benefits = 1000;
-const costs = 500;
 
 CBAButton.addEventListener("click", ()=>{
   const costBenefitResult = ((benefits - costs) / benefits) * 100;
@@ -204,9 +330,7 @@ function calculateCustomerLifetimeValue(
   return clv;
 }
 
-const averageMonthlyRevenuePerUser = 50;
-const averageUserLifespanInMonths = 24;
-const grossMargin = 0.6;
+
 
 CLVButton.addEventListener('click', ()=> {
   const TotalCustomerLifetimeValue = calculateCustomerLifetimeValue(
@@ -250,8 +374,6 @@ function calculateROI(profit, costs) {
   return roi;
 }
 
-const profit = 2000;
-const TotalCosts = 1000;
 
 ROIButton.addEventListener('click', ()=> {
   const roiResult = calculateROI(profit, costs);
@@ -298,8 +420,6 @@ function calculatePriceElasticity(
   return priceElasticity;
 }
 
-const percentChangeInQuantityDemanded = -10; // Example: 10% decrease in quantity demanded
-const percentChangeInPrice = 5; // Example: 5% increase in price
 
 PEButton.addEventListener('click', ()=>{
   const elasticity = calculatePriceElasticity(
@@ -338,9 +458,6 @@ function calculateProductMargin(sellingPrice, variableCost) {
   return grossProfit;
 }
 
-// Example usage:
-const sellingPrice = 100; // Example selling price
-const variableCost = 60; // Example variable cost
 
 PMButton.addEventListener('click', ()=>{
   const productMargin = calculateProductMargin(sellingPrice, variableCost);
@@ -431,10 +548,7 @@ function calculateCACandLTV(
 }
 
 // Example usage:
-const marketingCosts = 10000; // Example marketing costs
-const TotalNumberOfNewCustomers = 200; // Example number of new customers
-const clv = 1200; // Example Customer Lifetime Value (from previous calculation)
-const averageRetention = 0.75; // Example average retention rate (75%)
+
 
 CACCLVButton.addEventListener('click',()=>{
   const finalResults = calculateCACandLTV(
@@ -484,8 +598,7 @@ function calculateChurnRate(numberOfLostCustomers, totalNumberOfCustomers) {
 }
 
 // Example usage:
-const numberOfLostCustomers = 50; // Example number of lost customers
-const totalNumberOfCustomers = 1000; // Example total number of customers
+
 
 CRButton.addEventListener('click', ()=>{
   const churnRateResult = calculateChurnRate(
@@ -532,8 +645,7 @@ function calculateCompetitiveBenchmark(yourCompanyMetric, industryMetric) {
 }
 
 // Example usage:
-const yourCompanyConversionRate = 5; // Example: Your company's conversion rate is 5%
-const industryAverageConversionRate = 3; // Example: Industry average conversion rate is 3%
+
 
 CBButton.addEventListener('click', ()=>{
   const benchmarkResult = calculateCompetitiveBenchmark(
@@ -586,8 +698,7 @@ function calculateGrossProfitMargin(revenue, costOfGoodsSoldForGross) {
   return grossProfitMargin;
 }
 
-const revenue = 1239103;
-const costOfGoodsSoldForGross =  238585;
+
 
 GPMButton.addEventListener('click', ()=>{
   const grossProfitMarginResult = calculateGrossProfitMargin(
@@ -628,7 +739,6 @@ function calculateAverageOrderValue(totalRevenue, numberOfOrders) {
 
   return averageOrderValue;
 }
-const numberOfOrders = 200; // Example number of orders
 
 AOVButton.addEventListener('click', ()=>{
   const averageOrderValueResult = calculateAverageOrderValue(
@@ -677,9 +787,7 @@ function calculateCustomerAcquisitionCost(
   return customerAcquisitionCost;
 }
 
-// Example usage:
-const marketingSpend = 5000; // Example marketing spend for the period
-const numberOfNewCustomers = 100; // Example number of new customers acquired during the period
+
 
 CACButton.addEventListener('click', ()=>{
   const cacResult = calculateCustomerAcquisitionCost(
@@ -725,8 +833,6 @@ function calculateCustomerRetentionRate(retainedCustomers, initialCustomers) {
   return retentionRate;
 }
 
-const retainedCustomers = 900; // Example: 900 customers were retained
-const initialCustomers = 1000; // Example: You started with 1000 customers
 
 CRRButton.addEventListener('click', ()=>{
   const retentionRateResult = calculateCustomerRetentionRate(
@@ -781,8 +887,7 @@ function calculateNPS(percentPromoters, percentDetractors) {
   return nps;
 }
 
-const percentPromoters = 75; // Example: 75% of respondents are promoters
-const percentDetractors = 10; // Example: 10% of respondents are detractors
+
 
 NPSButton.addEventListener('click', ()=>{
   const npsResult = calculateNPS(percentPromoters, percentDetractors);
@@ -865,8 +970,7 @@ function calculateCSATandNSAT(percentSatisfied, percentDissatisfied) {
   return { csat: percentSatisfied, nsat: nsat };
 }
 
-const percentSatisfiedCustomers = 80; // Example: 80% of customers are satisfied
-const percentDissatisfiedCustomers = 15; // Example: 15% of customers are dissatisfied
+
 
 const results = calculateCSATandNSAT(
   percentSatisfiedCustomers,
@@ -896,9 +1000,7 @@ function calculateROAS(revenueFromAds, costOfAdSpend) {
   return roas;
 }
 
-// Example usage:
-const revenueFromAds = 12000; // Example revenue generated from ads
-const costOfAdSpend = 2000; // Example cost of running the ads
+
 
 const roasResult = calculateROAS(revenueFromAds, costOfAdSpend);
 
@@ -925,8 +1027,7 @@ function calculateEmailConversionRate(completedActions, totalClicks) {
 }
 
 // Example usage:
-const completedPurchasesFromEmail = 50; // Example: 50 people made a purchase after clicking the email
-const totalEmailClicks = 500; // Example: 500 people clicked on the email
+
 
 EMCRButton.addEventListener('click', ()=>{
   const emailConversionRateResult = calculateEmailConversionRate(
@@ -974,8 +1075,7 @@ function calculateARPU(totalRevenue, numberOfUsers) {
 }
 
 // Example usage:
-const totalRevenueForPeriod = 50000; // Example total revenue for the period
-const numberOfUsersForPeriod = 2500; // Example number of users during the period
+
 
 ARPUButton.addEventListener('click', ()=>{
   const arpuResult = calculateARPU(totalRevenueForPeriod, numberOfUsersForPeriod);
@@ -1016,8 +1116,7 @@ function calculateLTVtoCACRatio(clv, cac) {
 }
 
 // Example usage:
-const customerLifetimeValue = 1200; // Example CLV
-const customerAcquisitionCost = 200; // Example CAC
+
 
 CLVCARButton.addEventListener('click', ()=>{
   const ltvToCacRatioResult = calculateLTVtoCACRatio(
@@ -1069,9 +1168,6 @@ function calculateInventoryTurnoverRate(
   return inventoryTurnoverRate;
 }
 
-// Example usage:
-const costOfGoodsSold = 50000; // Example cost of goods sold over a period
-const averageInventoryValue = 10000; // Example average inventory value over the same period
 
 ITRButton.addEventListener('click', ()=>{
   const inventoryTurnoverRateResult = calculateInventoryTurnoverRate(
@@ -1132,9 +1228,7 @@ function calculateOrderDefectRate(ordersWithDefects, totalOrders) {
   return defectRate;
 }
 
-// Example usage:
-const ordersWithDefects = 15; // Example number of orders with defects
-const totalOrders = 500; // Example total number of orders
+
 
 ODRButton.addEventListener('click', ()=>{
   const defectRateResult = calculateOrderDefectRate(
@@ -1179,10 +1273,6 @@ function calculateRevenuePerEmployee(totalRevenue, numberOfEmployees) {
 
   return revenuePerEmployee;
 }
-
-// Example usage:
-const totalRevenue = 1000000; // Example total revenue
-const numberOfEmployees = 50; // Example number of employees
 
 RPEButton.addEventListener('click', ()=>{
   const revenuePerEmployeeResult = calculateRevenuePerEmployee(
@@ -1268,8 +1358,7 @@ function calculateEBITDA(operatingIncome, depreciationAmortization) {
   return ebitda;
 }
 
-const operatingIncome = 250000; // Example operating income
-const depreciationAmortization = 50000; // Example depreciation & amortization expense
+
 
 EBITDAButton.addEventListener('click', ()=>{
   const ebitdaResult = calculateEBITDA(operatingIncome, depreciationAmortization);
@@ -1311,9 +1400,7 @@ function calculateFreeCashFlow(cashFromOperations, capitalExpenditures) {
   return freeCashFlow;
 }
 
-// Example usage:
-const cashFromOperations = 500000; // Example cash flow from operations
-const capitalExpenditures = 100000; // Example capital expenditures
+
 
 FCFButton.addEventListener('click', ()=>{
   const freeCashFlowResult = calculateFreeCashFlow(
@@ -1359,9 +1446,7 @@ function calculateDebtToEquityRatio(totalLiabilities, totalShareholdersEquity) {
   return debtToEquityRatio;
 }
 
-// Example usage:
-const totalLiabilities = 500000; // Example total liabilities
-const totalShareholdersEquity = 1000000; // Example total shareholders' equity
+
 
 const debtToEquityRatioResult = calculateDebtToEquityRatio(
   totalLiabilities,

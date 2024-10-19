@@ -232,3 +232,128 @@ who clicked on the email * 100
 | Shareholder Equity                    | $15,000,000|
 | Operating Income                       | $4,000,000  |
 | Capital Expenditures                   | $2,000,000  |
+
+
+Here's a list of all the parameters being passed to functions in the provided `script.js` file:
+
+**Function:** `estimateMarketSize`
+- `population` (number)
+- `targetMarketPercentage` (number)
+
+**Function:** `calculateCostBenefitAnalysis`
+- `benefits` (number)
+- `costs` (number)
+
+**Function:** `calculateCustomerLifetimeValue`
+- `averageMonthlyRevenuePerUser` (number)
+- `averageUserLifespanInMonths` (number)
+- `grossMargin` (number)
+
+**Function:** `calculateROI`
+- `profit` (number)
+- `costs` (number)
+
+**Function:** `calculatePriceElasticity`
+- `percentChangeInQuantityDemanded` (number)
+- `percentChangeInPrice` (number)
+
+**Function:** `calculateProductMargin`
+- `sellingPrice` (number)
+- `variableCost` (number)
+
+**Function:** `calculateCACandLTV`
+- `marketingCosts` (number)
+- `numberOfNewCustomers` (number)
+- `clv` (number)
+- `averageRetention` (number)
+
+**Function:** `calculateChurnRate`
+- `numberOfLostCustomers` (number)
+- `totalNumberOfCustomers` (number)
+
+**Function:** `calculateCompetitiveBenchmark`
+- `yourCompanyMetric` (number)
+- `industryMetric` (number)
+
+**Function:** `calculateGrossProfitMargin`
+- `revenue` (number)
+- `costOfGoodsSold` (number)
+
+**Function:** `calculateAverageOrderValue`
+- `totalRevenue` (number)
+- `numberOfOrders` (number)
+
+**Function:** `calculateCustomerAcquisitionCost`
+- `marketingSpend` (number)
+- `numberOfNewCustomers` (number)
+
+**Function:** `calculateCustomerRetentionRate`
+- `retainedCustomers` (number)
+- `initialCustomers` (number)
+
+**Function:** `calculateNPS`
+- `percentPromoters` (number)
+- `percentDetractors` (number)
+
+**Function:** `calculateConversionRate`
+- `completedActions` (number)
+- `totalVisitors` (number)
+
+**Function:** `calculateCSATandNSAT`
+- `percentSatisfied` (number)
+- `percentDissatisfied` (number)
+
+**Function:** `calculateROAS`
+- `revenueFromAds` (number)
+- `costOfAdSpend` (number)
+
+**Function:** `calculateEmailConversionRate`
+- `completedActions` (number)
+- `totalClicks` (number)
+
+**Function:** `calculateARPU`
+- `totalRevenue` (number)
+- `numberOfUsers` (number)
+
+**Function:** `calculateLTVtoCACRatio`
+- `clv` (number)
+- `cac` (number)
+
+**Function:** `calculateInventoryTurnoverRate`
+- `costOfGoodsSold` (number)
+- `averageInventoryValue` (number)
+
+**Function:** `calculateOrderDefectRate`
+- `ordersWithDefects` (number)
+- `totalOrders` (number)
+
+**Function:** `calculateRevenuePerEmployee`
+- `totalRevenue` (number)
+- `numberOfEmployees` (number)
+
+**Function:** `calculateOperatingProfitMargin`
+- `operatingIncome` (number)
+- `revenue` (number)
+
+**Function:** `calculateEBITDA`
+- `operatingIncome` (number)
+- `depreciationAmortization` (number)
+
+**Function:** `calculateFreeCashFlow`
+- `cashFromOperations` (number)
+- `capitalExpenditures` (number)
+
+**Function:** `calculateDebtToEquityRatio`
+- `totalLiabilities` (number)
+- `totalShareholdersEquity` (number)
+
+**Function:** `createChart`
+- `ctx` (CanvasRenderingContext2D) 
+- `type` (string)
+- `labels` (array)
+- `data` (array)
+- `label` (string)
+
+**Note:** The commented-out `forecastSales` function and its related example are not being called, so I haven't included their parameters.
+
+967
