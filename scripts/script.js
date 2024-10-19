@@ -59,6 +59,8 @@ let totalRevenueForPeriod = "";
 let numberOfUsersForPeriod = ""; 
 let completedPurchasesFromEmail = ""; 
 let totalEmailClicks = ""; 
+let operatingIncomeForProfitMargin = 200000; 
+let revenueForProfitMargin = 1000000; 
 
 function loading() {
   console.log("loading");
@@ -115,9 +117,6 @@ async function retData(){
   return mockData;
 }
 
-
-
-alert(totalEmailClicks)
 processData();
 
 checkTables();
@@ -150,7 +149,7 @@ const RPEButton= document.getElementById("revenue-per-employee")
 const OPMButton= document.getElementById("operating-profit-margin")
 const EBITDAButton= document.getElementById("earnings-before-interest-taxes-depreciation-and-amortization")
 const FCFButton= document.getElementById("free-cash-flow")
-
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
 // Function to create a chart
 function createChart(ctx, type, labels, data, label) {
   return new Chart(ctx, {
@@ -330,7 +329,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const MarketSizeEstimationCtx = document.getElementById('MarketSizeEstimation').getContext('2d');
-      createChart(MarketSizeEstimationCtx, 'radar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Market Size Estimation');
+      createChart(MarketSizeEstimationCtx, 'bar', ['Population', 'Annually'], [population, targetMarketPercentage], 'Market Size Estimation'); 
     })
     
     function calculateCostBenefitAnalysis(benefits, costs) {
@@ -365,7 +364,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const CustomerBenefitAnalysisCtx = document.getElementById('CustomerBenefitAnalysis').getContext('2d');
-      createChart(CustomerBenefitAnalysisCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Benefit Analysis');
+      createChart(CustomerBenefitAnalysisCtx, 'pie', ['costs', 'benefits'], [costs, benefits], 'Customer Benefit Analysis');
       
     })
     
@@ -417,7 +416,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const CustomerLifetimeValueCtx = document.getElementById('CustomerLifetimeValue').getContext('2d');
-      createChart(CustomerLifetimeValueCtx, 'pie', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Lifetime Value');
+      createChart(CustomerLifetimeValueCtx, 'scatter', ['averageMonthlyRevenuePerUser', 'averageUserLifespanInMonths', 'grossMargin'], [averageMonthlyRevenuePerUser, averageUserLifespanInMonths, grossMargin], 'Customer Lifetime Value');
     })
     
     function calculateROI(profit, costs) {
@@ -456,7 +455,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const returnOnInvestmentCtx = document.getElementById('returnOnInvestment').getContext('2d');
-      createChart(returnOnInvestmentCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Return On Investment');
+      createChart(returnOnInvestmentCtx, 'bar', ['profit', 'costs'], [profit, costs], 'Return On Investment');
     })
     
     function calculatePriceElasticity(
@@ -505,7 +504,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const PriceElasticityCtx = document.getElementById('PriceElasticity').getContext('2d');
-      createChart(PriceElasticityCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Lifetime Value');
+      createChart(PriceElasticityCtx, 'bar', ['ChangeInQuantityDemanded', 'percentChangeInPrice'], [percentChangeInQuantityDemanded, percentChangeInPrice], 'Price Elasticity Chart');
     })
     
     function calculateProductMargin(sellingPrice, variableCost) {
@@ -540,7 +539,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const productMarginCtx = document.getElementById('productMargin').getContext('2d');
-      createChart(productMarginCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Product Margin');
+      createChart(productMarginCtx, 'bar', ['sellingPrice', 'variableCost'], [sellingPrice, variableCost], 'Product Margin');
     })
     
     
@@ -637,7 +636,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerAcquisitionCostCustomerLifetimeValueCtx = document.getElementById('customerAcquisitionCostCustomerLifetimeValue').getContext('2d');
-      createChart(customerAcquisitionCostCustomerLifetimeValueCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Acquisition Cost & Customer Lifetime Value');
+      createChart(customerAcquisitionCostCustomerLifetimeValueCtx, 'pie', ['Customer Acquisition Cost', 'Customer Lifetime Value'], [finalResults.cac,finalResults.ltv], 'Customer Acquisition Cost & Customer Lifetime Value Ratio');
     })
     
     function calculateChurnRate(numberOfLostCustomers, totalNumberOfCustomers) {
@@ -684,7 +683,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const churnRateCtx = document.getElementById('churnRate').getContext('2d');
-      createChart(churnRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Churn Rate');
+      createChart(churnRateCtx, 'pie', ['Total Number of Customers', 'Number of Lost Customer'], [totalNumberOfCustomers, numberOfLostCustomers], 'Churn Rate');
     })
     
     function calculateCompetitiveBenchmark(yourCompanyMetric, industryMetric) {
@@ -738,7 +737,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const competitiveBenchmarkCtx = document.getElementById('competitiveBenchmark').getContext('2d');
-      createChart(competitiveBenchmarkCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Competetinve Benchmark');
+      createChart(competitiveBenchmarkCtx, 'bar', ['Your Conversion Rate', 'Industry Average Conversion Rate'], [yourCompanyConversionRate, industryAverageConversionRate], 'Competitive Benchmark');
     })
     
     function calculateGrossProfitMargin(revenue, costOfGoodsSoldForGross) {
@@ -784,7 +783,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const grossProfitMarginCtx = document.getElementById('grossProfitMargin').getContext('2d');
-      createChart(grossProfitMarginCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Gross Profit Margin');
+      createChart(grossProfitMarginCtx, 'bar', ['Revenue', 'Cost of Goods Sold'], [revenue, costOfGoodsSoldForGross], 'Gross Profit Margin');
     })
     
     function calculateAverageOrderValue(totalRevenue, numberOfOrders) {
@@ -824,7 +823,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const averageOrderValueCtx = document.getElementById('averageOrderValue').getContext('2d');
-      createChart(averageOrderValueCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Average Order Value');
+      createChart(averageOrderValueCtx, 'line', ['Total Revenue', 'Number of Orders'], [totalRevenue, numberOfOrders], 'Average Order Value');
     })
     
     function calculateCustomerAcquisitionCost(
@@ -873,7 +872,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerAcquisitionCostCtx = document.getElementById('customerAcquisitionCost').getContext('2d');
-      createChart(customerAcquisitionCostCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Churn Rate');
+      createChart(customerAcquisitionCostCtx, 'line', ['Marketing Spend', 'Number of New Customers'], [marketingSpend, numberOfNewCustomers], 'Customer Acquisition Cost');
     })
     
     function calculateCustomerRetentionRate(retainedCustomers, initialCustomers) {
@@ -922,7 +921,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerRetentionRateCtx = document.getElementById('customerRetentionRate').getContext('2d');
-      createChart(customerRetentionRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Retention Rate');
+      createChart(customerRetentionRateCtx, 'line', ['Retained Customers', 'Initial Customers'], [retainedCustomers, initialCustomers], 'Customer Retention Rate');
     })
     
     function calculateNPS(percentPromoters, percentDetractors) {
@@ -970,7 +969,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const netPromoterScoreCtx = document.getElementById('netPromoterScore').getContext('2d');
-      createChart(netPromoterScoreCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Net Promoter Score');
+      createChart(netPromoterScoreCtx, 'pie', ['Percent Promoters', 'Percent Detractors'], [percentPromoters, percentDetractors], 'Net Promoter Score');
     })
     
     function calculateConversionRate(completedActions, totalVisitors) {
@@ -995,18 +994,30 @@ async function processData() {
     const completedPurchases = 150; // Example: 150 visitors made a purchase
     const totalWebsiteVisitors = 10000; // Example: 10000 visitors came to the website
     
-    // CRButton.addEventListener('click', ()=>{
-    //   const conversionRateResult = calculateConversionRate(
-    //     completedPurchases,
-    //     totalWebsiteVisitors
-    //   );
+    WCRButton.addEventListener('click', ()=>{
+      const conversionRateResult = calculateConversionRate(
+        completedPurchases,
+        totalWebsiteVisitors
+      );
       
-    //   if (typeof conversionRateResult === "number") {
-    //     console.log("Website Conversion Rate:", conversionRateResult + "%");
-    //   } else {
-    //     console.error(conversionRateResult); // Display error message if inputs were invalid
-    //   }
-    // })
+      if (typeof conversionRateResult === "number") {
+        console.log("Website Conversion Rate:", conversionRateResult + "%");
+      } else {
+        console.error(conversionRateResult); // Display error message if inputs were invalid
+      }
+
+      const card = document.createElement('div')
+      card.classList.add('canvas-container')
+      const canvas = document.createElement('canvas')
+      canvas.id = 'websiteConversionRate'
+      canvas.ariaLabel = 'Website Conversion Rate'
+      canvas.role = 'img'
+      card.appendChild(canvas)
+      document.getElementById('main-content').appendChild(card)
+    
+      const websiteConversionRateCtx = document.getElementById('websiteConversionRate').getContext('2d');
+      createChart(websiteConversionRateCtx, 'pie', ['Completed Purchases', 'Total Website Visitors'], [completedPurchases, totalWebsiteVisitors], 'Website Conversion Rate');
+    })
     
     function calculateCSATandNSAT(percentSatisfied, percentDissatisfied) {
       // Validate inputs (optional, but recommended)
@@ -1032,19 +1043,32 @@ async function processData() {
       return { csat: percentSatisfied, nsat: nsat };
     }
     
+    CSNSButton.addEventListener('click', ()=>{
+
+      const results = calculateCSATandNSAT(
+        percentSatisfiedCustomers,
+        percentDissatisfiedCustomers
+      );
+      
+      if (typeof results === "object") {
+        console.log("Customer Satisfaction (CSAT):", results.csat + "%");
+        console.log("Net Satisfaction (NSAT):", results.nsat);
+      } else {
+        console.error(results); // Display error message if inputs were invalid
+      }
+
+      const card = document.createElement('div')
+      card.classList.add('canvas-container')
+      const canvas = document.createElement('canvas')
+      canvas.id = 'customerSatisfactionNetSatisfaction'
+      canvas.ariaLabel = 'Customer Satisfaction & Net Satisfaction Rate'
+      canvas.role = 'img'
+      card.appendChild(canvas)
+      document.getElementById('main-content').appendChild(card)
     
-    
-    const results = calculateCSATandNSAT(
-      percentSatisfiedCustomers,
-      percentDissatisfiedCustomers
-    );
-    
-    if (typeof results === "object") {
-      console.log("Customer Satisfaction (CSAT):", results.csat + "%");
-      console.log("Net Satisfaction (NSAT):", results.nsat);
-    } else {
-      console.error(results); // Display error message if inputs were invalid
-    }
+      const customerSatisfactionNetSatisfactionCtx = document.getElementById('customerSatisfactionNetSatisfaction').getContext('2d');
+      createChart(customerSatisfactionNetSatisfactionCtx, 'pie', ['Customer Satisfaction', 'Net Satisfaction'], [percentSatisfiedCustomers, percentDissatisfiedCustomers], 'Customer Satisfaction & Net Satisfaction');
+    })
     
     function calculateROAS(revenueFromAds, costOfAdSpend) {
       // Validate inputs (optional, but recommended)
@@ -1056,21 +1080,35 @@ async function processData() {
         return "Invalid input: Cost of ad spend cannot be zero.";
       }
     
+    
       // Calculate ROAS
       const roas = (revenueFromAds - costOfAdSpend) / costOfAdSpend;
     
       return roas;
     }
     
+    RAPButton.addEventListener('click', ()=>{
+      const roasResult = calculateROAS(revenueFromAds, costOfAdSpend);
+      
+      if (typeof roasResult === "number") {
+        console.log("Return on Ad Spend (ROAS):", roasResult);
+      } else {
+        console.error(roasResult); // Display error message if inputs were invalid
+      }
+
+      const card = document.createElement('div')
+      card.classList.add('canvas-container')
+      const canvas = document.createElement('canvas')
+      canvas.id = 'returnOnAdSpend'
+      canvas.ariaLabel = 'Return on Ad Spend'
+      canvas.role = 'img'
+      card.appendChild(canvas)
+      document.getElementById('main-content').appendChild(card)
     
-    
-    const roasResult = calculateROAS(revenueFromAds, costOfAdSpend);
-    
-    if (typeof roasResult === "number") {
-      console.log("Return on Ad Spend (ROAS):", roasResult);
-    } else {
-      console.error(roasResult); // Display error message if inputs were invalid
-    }
+      const returnOnAdSpendCtx = document.getElementById('returnOnAdSpend').getContext('2d');
+      createChart(returnOnAdSpendCtx, 'pie', ['Revenue From Ads', 'Cost of Ad Spend'], [revenueFromAds, costOfAdSpend], 'Return on Ad Spend');
+    })
+
     
     function calculateEmailConversionRate(completedActions, totalClicks) {
       // Validate inputs (optional, but recommended)
@@ -1116,7 +1154,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const emailMarketingConversionRateCtx = document.getElementById('emailMarketingConversionRate').getContext('2d');
-      createChart(emailMarketingConversionRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Email Marketing Conversion Rate');
+      createChart(emailMarketingConversionRateCtx, 'line', ['Completed Purchases', 'Total Email Clicks'], [completedPurchasesFromEmail, totalEmailClicks], 'Email Marketing Conversion Rate');
     })
     
     
@@ -1158,7 +1196,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const averageRevenuePerUserCtx = document.getElementById('averageRevenuePerUser').getContext('2d');
-      createChart(averageRevenuePerUserCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Average Revenue Per User');
+      createChart(averageRevenuePerUserCtx, 'pie', ['Total Revenue', 'Number of Users'], [totalRevenue, numberOfUsers], 'Average Revenue Per User');
     })
     
     function calculateLTVtoCACRatio(clv, cac) {
@@ -1205,7 +1243,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerLifetimeValueToCustomerAcquisitionCostCtx = document.getElementById('customerLifetimeValueToCustomerAcquisitionCost').getContext('2d');
-      createChart(customerLifetimeValueToCustomerAcquisitionCostCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Lifetime Value to Customer Acquisition Cost');
+      createChart(customerLifetimeValueToCustomerAcquisitionCostCtx, 'bubble', ['Customer Lifetime Value', 'Customer Acquisition Cost'], [customerLifetimeValue, customerAcquisitionCost], 'Customer Lifetime Value to Customer Acquisition Cost Ratio');
     })
     
     function calculateInventoryTurnoverRate(
@@ -1253,7 +1291,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const inventoryTurnvoerRateCtx = document.getElementById('inventoryTurnvoerRate').getContext('2d');
-      createChart(inventoryTurnvoerRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Inventory Turnover');
+      createChart(inventoryTurnvoerRateCtx, 'scatter', ['Cost of Goods Sold', 'Average Inventory Value'], [costOfGoodsSold, averageInventoryValue], 'Inventory Turnover');
     })
     
     
@@ -1314,7 +1352,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const orderDefectRateCtx = document.getElementById('orderDefectRate').getContext('2d');
-      createChart(orderDefectRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Order Defect rate');
+      createChart(orderDefectRateCtx, 'radar', ['Orders with Defects', 'Total Orders'], [ordersWithDefects, totalOrders], 'Order Defect rate');
     })
     
     function calculateRevenuePerEmployee(totalRevenue, numberOfEmployees) {
@@ -1358,7 +1396,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const revenuePerEmployeeCtx = document.getElementById('revenuePerEmployee').getContext('2d');
-      createChart(revenuePerEmployeeCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Revenue Per Employee');
+      createChart(revenuePerEmployeeCtx, 'area', ['Revenue', 'Number of Employees'], [revenue, numberOfEmployees], 'Revenue Per Employee');
     })
     
     function calculateOperatingProfitMargin(operatingIncomeForProfitMargin, revenueForProfitMargin) {
@@ -1377,13 +1415,12 @@ async function processData() {
       return operatingProfitMargin;
     }
     
-    const operatingIncomeForProfitMargin = 200000; // Example operating income
-    const revenueForProfitMargin = 1000000; // Example revenue
+    
     
     OPMButton.addEventListener('click', ()=>{
       const operatingProfitMarginResult = calculateOperatingProfitMargin(
-        operatingIncomeForProfitMargin,
-        revenueForProfitMargin
+        operatingIncome,
+        revenue
       );
       
       if (typeof operatingProfitMarginResult === "number") {
@@ -1402,7 +1439,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const operatingProfitMarginCtx = document.getElementById('operatingProfitMargin').getContext('2d');
-      createChart(operatingProfitMarginCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Operating Profit Margin');
+      createChart(operatingProfitMarginCtx, 'doughnut', ['Operating Income', 'Depreciation & Amortization'], [operatingIncome, depreciationAmortization], 'Operating Profit Margin');
     })
     
     function calculateEBITDA(operatingIncome, depreciationAmortization) {
@@ -1444,7 +1481,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const earningsBeforeInterestTaxesDepreciationaAmortizationCtx = document.getElementById('earningsBeforeInterestTaxesDepreciationaAmortization').getContext('2d');
-      createChart(earningsBeforeInterestTaxesDepreciationaAmortizationCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Earnings Before Interest, Taxes, Depreciation, and Amortization');
+      createChart(earningsBeforeInterestTaxesDepreciationaAmortizationCtx, 'bar', ['Cash from Operations', 'Capital Expenditures'], [cashFromOperations, capitalExpenditures], 'Earnings Before Interest, Taxes, Depreciation, and Amortization');
     })
     
     function calculateFreeCashFlow(cashFromOperations, capitalExpenditures) {
@@ -1486,7 +1523,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const freeCashFlowCtx = document.getElementById('freeCashFlow').getContext('2d');
-      createChart(freeCashFlowCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Free Cash Flow');
+      createChart(freeCashFlowCtx, 'line', ['Cash from Operations', 'Capital Expenditures'], [cashFromOperations, capitalExpenditures], 'Free Cash Flow');
     })
     
     function calculateDebtToEquityRatio(totalLiabilities, totalShareholdersEquity) {
