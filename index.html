@@ -29,7 +29,7 @@
     <input type="button" class="filter-buttons" value="Return on Investment" id="return-on-investment">
     <input type="button" class="filter-buttons" value="Price Elasticity" id="price-elasticity">
     <input type="button" class="filter-buttons" value="Product Margin" id="product-margin">
-    <input type="button" class="filter-buttons" value="Sales Forecasting & Revenue Projections" id="sales-forecasting-revenue-projections">
+    <!-- <input type="button" class="filter-buttons" value="Sales Forecasting & Revenue Projections" id="sales-forecasting-revenue-projections"> -->
     <input type="button" class="filter-buttons" value="Customer Acquisition Cost & Lifetime Value" id="customer-acquisition-cost-lifetime-value">
     <input type="button" class="filter-buttons" value="Churn Rate" id="churn-rate">
     <input type="button" class="filter-buttons" value="Competitive Benchmarking" id="competitive-benchmarking">
@@ -38,14 +38,14 @@
     <input type="button" class="filter-buttons" value="Customer Acquisition Cost" id="customer-acquisition-cost">
     <input type="button" class="filter-buttons" value="Customer Retention Rate" id="customer-retention-rate">
     <input type="button" class="filter-buttons" value="Net Promoter Score" id="net-promoter-score">
-    <input type="button" class="filter-buttons" value="Website Conversion Rate" id="website-conversion-rate">
-    <input type="button" class="filter-buttons" value="Customer Satisfaction & Net Satisfaction" id="customer-satisfaction-net-satisfaction">
-    <input type="button" class="filter-buttons" value="Return on Advertising Spend" id="return-on-advertising-spend">
+    <!-- <input type="button" class="filter-buttons" value="Website Conversion Rate" id="website-conversion-rate"> -->
+    <!-- <input type="button" class="filter-buttons" value="Customer Satisfaction & Net Satisfaction" id="customer-satisfaction-net-satisfaction"> -->
+    <!-- <input type="button" class="filter-buttons" value="Return on Advertising Spend" id="return-on-advertising-spend"> -->
     <input type="button" class="filter-buttons" value="Email Marketing Conversion Rate" id="email-marketing-conversion-rate">
     <input type="button" class="filter-buttons" value="Average Revenue Per User" id="average-revenue-per-user">
     <input type="button" class="filter-buttons" value="Customer Lifetime Value to Customer Acquisition Cost Ratio" id="customer-lifetime-value-customer-acquisition-cost-ratio">
     <input type="button" class="filter-buttons" value="Inventory Turnover Rate" id="inventory-turnover-rate">
-    <input type="button" class="filter-buttons" value="Order Fulfillment Cycle Time" id="order-fulfillment-cycle-time">
+    <!-- <input type="button" class="filter-buttons" value="Order Fulfillment Cycle Time" id="order-fulfillment-cycle-time"> -->
     <input type="button" class="filter-buttons" value="Order Defect Rate" id="order-defect-rate">
     <input type="button" class="filter-buttons" value="Revenue Per Employee" id="revenue-per-employee">
     <input type="button" class="filter-buttons" value="Operating Profit Margin" id="operating-profit-margin">
@@ -54,114 +54,10 @@
   </div>
 
   <div id="main-content">
-    <div class="canvas-container">
-      <canvas id="salesChart" aria-label="Sales Performance Chart" role="img"></canvas>
-    </div>
-    <div class="canvas-container">
-      <canvas id="customerRetentionChart" aria-label="Customer Retention Chart" role="img"></canvas>
-    </div>
-    <div class="canvas-container">
-      <canvas id="revenueChart" aria-label="Revenue Growth Chart" role="img"></canvas>
-    </div>
-    <div class="canvas-container">
-      <canvas id="marketShareChart" aria-label="Market Share Chart" role="img"></canvas>
-    </div>
-    <div class="canvas-container">
-      <canvas id="productPerformanceChart" aria-label="Product Performance Chart" role="img"></canvas>
-    </div>
+    
   </div>
 
   <script src="scripts/script.js"></script>
-  <script>
-    // Function to create a chart
-    function createChart(ctx, type, labels, data, label) {
-      return new Chart(ctx, {
-        type: type,
-        data: {
-          labels: labels,
-          datasets: [{
-            label: label,
-            data: data,
-            backgroundColor: 'rgba(224, 224, 224, 0.2)',
-            borderColor: '#e0e0e0',
-            tension: 0.1
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: {
-            y: {
-              beginAtZero: true,
-              grid: {
-                color: '#2c2c2c'
-              },
-              ticks: {
-                color: '#a0a0a0'
-              }
-            },
-            x: {
-              grid: {
-                color: '#2c2c2c'
-              },
-              ticks: {
-                color: '#a0a0a0'
-              }
-            }
-          },
-          plugins: {
-            legend: {
-              labels: {
-                color: '#e0e0e0'
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // Create charts
-    const salesCtx = document.getElementById('salesChart').getContext('2d');
-    createChart(salesCtx, 'line', ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], [12, 19, 3, 5, 2, 3], 'Sales');
-
-    const retentionCtx = document.getElementById('customerRetentionChart').getContext('2d');
-    createChart(retentionCtx, 'bar', ['Q1', 'Q2', 'Q3', 'Q4'], [75, 80, 85, 82], 'Retention Rate (%)');
-
-    const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-    createChart(revenueCtx, 'line', ['2019', '2020', '2021', '2022', '2023'], [100, 120, 150, 180, 210], 'Revenue (millions)');
-
-    const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
-    createChart(marketShareCtx, 'pie', ['Our Product', 'Competitor A', 'Competitor B', 'Others'], [40, 30, 20, 10], 'Market Share (%)');
-
-    const productPerformanceCtx = document.getElementById('productPerformanceChart').getContext('2d');
-    createChart(productPerformanceCtx, 'radar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Product Ratings');
-
-    // Scroll animation
-    const header = document.querySelector('header');
-    const logo = document.querySelector('.logo');
-    const searchContainer = document.getElementById('filter-search-container');
-    let lastScrollTop = 0;
-
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollProgress = Math.min(scrollTop / 100, 1);
-
-      if (scrollTop > lastScrollTop) {
-        // Scrolling down
-        header.style.justifyContent = `flex-end`;
-        logo.style.transform = `scale(${1 - 0.2 * scrollProgress})`;
-        searchContainer.style.opacity = `${1 - scrollProgress}`;
-        searchContainer.style.transform = `translateY(${-20 * scrollProgress}px)`;
-      } else {
-        // Scrolling up
-        header.style.justifyContent = `center`;
-        logo.style.transform = `scale(1)`;
-        searchContainer.style.opacity = '1';
-        searchContainer.style.transform = 'translateY(0)';
-      }
-
-      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-    });
-  </script>
+  
 </body>
 </html>

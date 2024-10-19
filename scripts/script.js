@@ -27,6 +27,80 @@ const OPMButton= document.getElementById("operating-profit-margin")
 const EBITDAButton= document.getElementById("earnings-before-interest-taxes-depreciation-and-amortization")
 const FCFButton= document.getElementById("free-cash-flow")
 
+// Function to create a chart
+function createChart(ctx, type, labels, data, label) {
+  return new Chart(ctx, {
+    type: type,
+    data: {
+      labels: labels,
+      datasets: [{
+        label: label,
+        data: data,
+        backgroundColor: 'rgba(224, 224, 224, 0.2)',
+        borderColor: '#e0e0e0',
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          grid: {
+            color: '#2c2c2c'
+          },
+          ticks: {
+            color: '#a0a0a0'
+          }
+        },
+        x: {
+          grid: {
+            color: '#2c2c2c'
+          },
+          ticks: {
+            color: '#a0a0a0'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            color: '#e0e0e0'
+          }
+        }
+      }
+    }
+  });
+}
+
+// Scroll animation
+const header = document.querySelector('header');
+const logo = document.querySelector('.logo');
+const searchContainer = document.getElementById('filter-search-container');
+let lastScrollTop = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+  const scrollProgress = Math.min(scrollTop / 100, 1);
+
+  if (scrollTop > lastScrollTop) {
+    // Scrolling down
+    header.style.justifyContent = `flex-end`;
+    logo.style.transform = `scale(${1 - 0.2 * scrollProgress})`;
+    searchContainer.style.opacity = `${1 - scrollProgress}`;
+    searchContainer.style.transform = `translateY(${-20 * scrollProgress}px)`;
+  } else {
+    // Scrolling up
+    header.style.justifyContent = `center`;
+    logo.style.transform = `scale(1)`;
+    searchContainer.style.opacity = '1';
+    searchContainer.style.transform = 'translateY(0)';
+  }
+
+  lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+});
+
 let products = [];
 
 function estimateMarketSize(population, targetMarketPercentage) {
@@ -55,6 +129,18 @@ MSEButton.addEventListener("click", ()=>{
   } else {
     console.error(estimatedSize);
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'MarketSizeEstimation'
+  canvas.ariaLabel = 'Market Size Estimation Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const MarketSizeEstimationCtx = document.getElementById('MarketSizeEstimation').getContext('2d');
+  createChart(MarketSizeEstimationCtx, 'radar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Market Size Estimation');
 })
 
 function calculateCostBenefitAnalysis(benefits, costs) {
@@ -80,6 +166,19 @@ CBAButton.addEventListener("click", ()=>{
   } else {
     console.error(costBenefitResult);
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'CustomerBenefitAnalysis'
+  canvas.ariaLabel = 'Customer Benefit Analysis Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const CustomerBenefitAnalysisCtx = document.getElementById('CustomerBenefitAnalysis').getContext('2d');
+  createChart(CustomerBenefitAnalysisCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Benefit Analysis');
+  
 })
 
 function calculateCustomerLifetimeValue(
@@ -121,6 +220,18 @@ CLVButton.addEventListener('click', ()=> {
   } else {
     console.error(TotalCustomerLifetimeValue);
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'CustomerLifetimeValue'
+  canvas.ariaLabel = 'Customer Lifetime Value'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const CustomerLifetimeValueCtx = document.getElementById('CustomerLifetimeValue').getContext('2d');
+  createChart(CustomerLifetimeValueCtx, 'pie', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Lifetime Value');
 })
 
 function calculateROI(profit, costs) {
@@ -150,6 +261,18 @@ ROIButton.addEventListener('click', ()=> {
   } else {
     console.error(roiResult);
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'returnOnInvestment'
+  canvas.ariaLabel = 'Return On Investment Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const returnOnInvestmentCtx = document.getElementById('returnOnInvestment').getContext('2d');
+  createChart(returnOnInvestmentCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Return On Investment');
 })
 
 function calculatePriceElasticity(
@@ -189,6 +312,18 @@ PEButton.addEventListener('click', ()=>{
   } else {
     console.error(elasticity); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'PriceElasticity'
+  canvas.ariaLabel = 'Price Elasticity Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const PriceElasticityCtx = document.getElementById('PriceElasticity').getContext('2d');
+  createChart(PriceElasticityCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Lifetime Value');
 })
 
 function calculateProductMargin(sellingPrice, variableCost) {
@@ -215,6 +350,18 @@ PMButton.addEventListener('click', ()=>{
   } else {
     console.error(productMargin); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'productMargin'
+  canvas.ariaLabel = 'Product Margin Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const productMarginCtx = document.getElementById('productMargin').getContext('2d');
+  createChart(productMarginCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Product Margin');
 })
 
 
@@ -303,6 +450,18 @@ CACCLVButton.addEventListener('click',()=>{
   } else {
     console.error(finalResults); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'customerAcquisitionCostCustomerLifetimeValue'
+  canvas.ariaLabel = 'customer Acquisition Cost and Customer Lifetime Value Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const customerAcquisitionCostCustomerLifetimeValueCtx = document.getElementById('customerAcquisitionCostCustomerLifetimeValue').getContext('2d');
+  createChart(customerAcquisitionCostCustomerLifetimeValueCtx, 'bar', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Acquisition Cost & Customer Lifetime Value');
 })
 
 function calculateChurnRate(numberOfLostCustomers, totalNumberOfCustomers) {
@@ -339,6 +498,18 @@ CRButton.addEventListener('click', ()=>{
   } else {
     console.error(churnRateResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'churnRate'
+  canvas.ariaLabel = 'Churn Rate Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const churnRateCtx = document.getElementById('churnRate').getContext('2d');
+  createChart(churnRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Churn Rate');
 })
 
 function calculateCompetitiveBenchmark(yourCompanyMetric, industryMetric) {
@@ -382,6 +553,18 @@ CBButton.addEventListener('click', ()=>{
   } else {
     console.error(benchmarkResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'competitiveBenchmark'
+  canvas.ariaLabel = 'Competitive Benchmark Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const competitiveBenchmarkCtx = document.getElementById('competitiveBenchmark').getContext('2d');
+  createChart(competitiveBenchmarkCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Competetinve Benchmark');
 })
 
 function calculateGrossProfitMargin(revenue, costOfGoodsSoldForGross) {
@@ -417,9 +600,21 @@ GPMButton.addEventListener('click', ()=>{
   } else {
     console.error(grossProfitMarginResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'grossProfitMargin'
+  canvas.ariaLabel = 'Gross Profit Margin'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const grossProfitMarginCtx = document.getElementById('grossProfitMargin').getContext('2d');
+  createChart(grossProfitMarginCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Gross Profit Margin');
 })
 
-function calculateAverageOrderValue(totalRevenueForOrderValue, numberOfOrders) {
+function calculateAverageOrderValue(totalRevenue, numberOfOrders) {
   // Validate inputs (optional, but recommended)
   if (typeof totalRevenue !== "number" || typeof numberOfOrders !== "number") {
     return "Invalid input: Total revenue and number of orders must be numbers.";
@@ -433,12 +628,11 @@ function calculateAverageOrderValue(totalRevenueForOrderValue, numberOfOrders) {
 
   return averageOrderValue;
 }
-const totalRevenueForOrderValue = 10000; // Example total revenue
 const numberOfOrders = 200; // Example number of orders
 
 AOVButton.addEventListener('click', ()=>{
   const averageOrderValueResult = calculateAverageOrderValue(
-    totalRevenueForOrderValue,
+    totalRevenue,
     numberOfOrders
   );
   
@@ -447,6 +641,18 @@ AOVButton.addEventListener('click', ()=>{
   } else {
     console.error(averageOrderValueResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'averageOrderValue'
+  canvas.ariaLabel = 'Average Order Value'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const averageOrderValueCtx = document.getElementById('averageOrderValue').getContext('2d');
+  createChart(averageOrderValueCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Average Order Value');
 })
 
 function calculateCustomerAcquisitionCost(
@@ -486,6 +692,18 @@ CACButton.addEventListener('click', ()=>{
   } else {
     console.error(cacResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'customerAcquisitionCost'
+  canvas.ariaLabel = 'Customer Acquisition Cost'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const customerAcquisitionCostCtx = document.getElementById('customerAcquisitionCost').getContext('2d');
+  createChart(customerAcquisitionCostCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Churn Rate');
 })
 
 function calculateCustomerRetentionRate(retainedCustomers, initialCustomers) {
@@ -525,6 +743,18 @@ CRRButton.addEventListener('click', ()=>{
   } else {
     console.error(retentionRateResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'customerRetentionRate'
+  canvas.ariaLabel = 'Customer Retention Rate Percentage'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const customerRetentionRateCtx = document.getElementById('customerRetentionRate').getContext('2d');
+  createChart(customerRetentionRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Retention Rate');
 })
 
 function calculateNPS(percentPromoters, percentDetractors) {
@@ -562,6 +792,18 @@ NPSButton.addEventListener('click', ()=>{
   } else {
     console.error(npsResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'netPromoterScore'
+  canvas.ariaLabel = 'Net Promoter Score'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const netPromoterScoreCtx = document.getElementById('netPromoterScore').getContext('2d');
+  createChart(netPromoterScoreCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Net Promoter Score');
 })
 
 function calculateConversionRate(completedActions, totalVisitors) {
@@ -700,6 +942,18 @@ EMCRButton.addEventListener('click', ()=>{
   } else {
     console.error(emailConversionRateResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'emailMarketingConversionRate'
+  canvas.ariaLabel = 'Email Marketing Conversion Rate'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const emailMarketingConversionRateCtx = document.getElementById('emailMarketingConversionRate').getContext('2d');
+  createChart(emailMarketingConversionRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Email Marketing Conversion Rate');
 })
 
 
@@ -731,6 +985,18 @@ ARPUButton.addEventListener('click', ()=>{
   } else {
     console.error(arpuResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'averageRevenuePerUser'
+  canvas.ariaLabel = 'Average Revenue Per User '
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const averageRevenuePerUserCtx = document.getElementById('averageRevenuePerUser').getContext('2d');
+  createChart(averageRevenuePerUserCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Average Revenue Per User');
 })
 
 function calculateLTVtoCACRatio(clv, cac) {
@@ -767,6 +1033,18 @@ CLVCARButton.addEventListener('click', ()=>{
   } else {
     console.error(ltvToCacRatioResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'customerLifetimeValueToCustomerAcquisitionCost'
+  canvas.ariaLabel = 'Customer Lifetime Value to Customer Acquisition Cost Ratio'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const customerLifetimeValueToCustomerAcquisitionCostCtx = document.getElementById('customerLifetimeValueToCustomerAcquisitionCost').getContext('2d');
+  createChart(customerLifetimeValueToCustomerAcquisitionCostCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Customer Lifetime Value to Customer Acquisition Cost');
 })
 
 function calculateInventoryTurnoverRate(
@@ -806,6 +1084,18 @@ ITRButton.addEventListener('click', ()=>{
   } else {
     console.error(inventoryTurnoverRateResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'inventoryTurnvoerRate'
+  canvas.ariaLabel = 'Inventory Turnover Rate'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const inventoryTurnvoerRateCtx = document.getElementById('inventoryTurnvoerRate').getContext('2d');
+  createChart(inventoryTurnvoerRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Inventory Turnover');
 })
 
 
@@ -857,6 +1147,18 @@ ODRButton.addEventListener('click', ()=>{
   } else {
     console.error(defectRateResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'orderDefectRate'
+  canvas.ariaLabel = 'Order Defect Rate Rate'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const orderDefectRateCtx = document.getElementById('orderDefectRate').getContext('2d');
+  createChart(orderDefectRateCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Order Defect rate');
 })
 
 function calculateRevenuePerEmployee(totalRevenue, numberOfEmployees) {
@@ -893,6 +1195,18 @@ RPEButton.addEventListener('click', ()=>{
   } else {
     console.error(revenuePerEmployeeResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'revenuePerEmployee'
+  canvas.ariaLabel = 'Revenue Per Employee'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const revenuePerEmployeeCtx = document.getElementById('revenuePerEmployee').getContext('2d');
+  createChart(revenuePerEmployeeCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Revenue Per Employee');
 })
 
 function calculateOperatingProfitMargin(operatingIncomeForProfitMargin, revenueForProfitMargin) {
@@ -925,6 +1239,18 @@ OPMButton.addEventListener('click', ()=>{
   } else {
     console.error(operatingProfitMarginResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'operatingProfitMargin'
+  canvas.ariaLabel = 'Operating Profit Margin Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const operatingProfitMarginCtx = document.getElementById('operatingProfitMargin').getContext('2d');
+  createChart(operatingProfitMarginCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Operating Profit Margin');
 })
 
 function calculateEBITDA(operatingIncome, depreciationAmortization) {
@@ -956,6 +1282,18 @@ EBITDAButton.addEventListener('click', ()=>{
   } else {
     console.error(ebitdaResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'earningsBeforeInterestTaxesDepreciationaAmortization'
+  canvas.ariaLabel = 'Earnings Before Interest, Taxes, Depreciation, and Amortization'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const earningsBeforeInterestTaxesDepreciationaAmortizationCtx = document.getElementById('earningsBeforeInterestTaxesDepreciationaAmortization').getContext('2d');
+  createChart(earningsBeforeInterestTaxesDepreciationaAmortizationCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Earnings Before Interest, Taxes, Depreciation, and Amortization');
 })
 
 function calculateFreeCashFlow(cashFromOperations, capitalExpenditures) {
@@ -988,6 +1326,18 @@ FCFButton.addEventListener('click', ()=>{
   } else {
     console.error(freeCashFlowResult); // Display error message if inputs were invalid
   }
+
+  const card = document.createElement('div')
+  card.classList.add('canvas-container')
+  const canvas = document.createElement('canvas')
+  canvas.id = 'freeCashFlow'
+  canvas.ariaLabel = 'Free Cash Flow Chart'
+  canvas.role = 'img'
+  card.appendChild(canvas)
+  document.getElementById('main-content').appendChild(card)
+
+  const freeCashFlowCtx = document.getElementById('freeCashFlow').getContext('2d');
+  createChart(freeCashFlowCtx, 'line', ['Quality', 'Price', 'Features', 'Support', 'Ease of Use'], [4.5, 3.8, 4.2, 4.0, 4.7], 'Free Cash Flow');
 })
 
 function calculateDebtToEquityRatio(totalLiabilities, totalShareholdersEquity) {
@@ -1022,57 +1372,4 @@ if (typeof debtToEquityRatioResult === "number") {
   console.log("Debt-to-Equity Ratio:", debtToEquityRatioResult);
 } else {
   console.error(debtToEquityRatioResult); // Display error message if inputs were invalid
-}
-
-const rawMaterialsHeading = document.querySelector(".raw-materials-heading");
-const laborCostHeading = document.querySelector(".labor-cost-heading");
-const equipmentMachineryHeading = document.querySelector(
-  ".equipment-machinery-heading"
-);
-const energyConsumptionHeading = document.querySelector(
-  ".energy-consumption-heading"
-);
-const wasteScrapHeading = document.querySelector(".waste-scrap-heading");
-const packagingHeading = document.querySelector(".packaging-heading");
-const transportationHeading = document.querySelector(".transportation-heading");
-const overheadCostHeading = document.querySelector(".overhead-cost-heading");
-
-overheadCostHeading.addEventListener("click", () => {
-  toggleDropdown("overheadCostDropdown");
-});
-transportationHeading.addEventListener("click", () => {
-  toggleDropdown("transportationDropdown");
-});
-
-packagingHeading.addEventListener("click", () => {
-  toggleDropdown("packagingDropdown");
-});
-
-wasteScrapHeading.addEventListener("click", () => {
-  toggleDropdown("wasteScrapDropdown");
-});
-
-energyConsumptionHeading.addEventListener("click", () => {
-  toggleDropdown("energyConsumptionDropdown");
-});
-
-equipmentMachineryHeading.addEventListener("click", () => {
-  toggleDropdown("equipment-machinery-heading");
-});
-
-laborCostHeading.addEventListener("click", () => {
-  toggleDropdown("laborCostDropdown");
-});
-
-rawMaterialsHeading.addEventListener("click", () => {
-  toggleDropdown("rawMaterialsDropdown");
-});
-
-function toggleDropdown(dropdownId) {
-  var dropdown = document.getElementById(dropdownId);
-  if (dropdown.style.display === "none") {
-    dropdown.style.display = "block";
-  } else {
-    dropdown.style.display = "none";
-  }
 }
