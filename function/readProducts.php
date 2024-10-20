@@ -66,6 +66,17 @@ while ($row = mysqli_fetch_assoc($result)){
     $numberOfUsersForPeriod = $row['numberOfUsersForPeriod'];
     $completedPurchasesFromEmail = $row['completedPurchasesFromEmail'];
     $totalEmailClicks = $row['totalEmailClicks'];
+    $totalEmailClicks = $row['totalEmailClicks'];
+    $age = $row['age'];
+    $gender = $row['gender'];
+    $language = $row['language'];
+    $educationLvl = $row['educationLvl'];
+    $investment = $row['investment'];
+    $products = $row['products'];
+    $completedPurchases = $row['completedPurchases'];
+    $totalWebsiteVisitors = $row['totalWebsiteVisitors'];
+    $operatingIncomeForProfitMargin = $row['operatingIncomeForProfitMargin'];
+    $revenueForProfitMargin = $row['revenueForProfitMargin'];
     $associativeArray[]=[
         'costOfGoodsSoldForGross' => $costOfGoodsSoldForGross,
         'population' => $population,
@@ -127,7 +138,17 @@ while ($row = mysqli_fetch_assoc($result)){
         'totalRevenueForPeriod' => $totalRevenueForPeriod,
         'numberOfUsersForPeriod' => $numberOfUsersForPeriod,
         'completedPurchasesFromEmail' => $completedPurchasesFromEmail,
-        'totalEmailClicks' => $totalEmailClicks
+        'totalEmailClicks' => $totalEmailClicks,
+        'age' => $age,
+        'gender' => $gender,
+        'language' => $language,
+        'educationLvl' => $educationLvl,
+        'investment' => $investment,
+        'products' => $products,
+        'completedPurchases' => $completedPurchases,
+        'totalWebsiteVisitors' => $totalWebsiteVisitors,
+        'operatingIncomeForProfitMargin' => $operatingIncomeForProfitMargin,
+        'revenueForProfitMargin' => $revenueForProfitMargin
     ];
 }
 echo json_encode($associativeArray);

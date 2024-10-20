@@ -1,66 +1,74 @@
-let costOfGoodsSoldForGross =  "";
-let population = "";
-let targetMarketPercentage = "";
-let benefits = "";
-let costs  = "";
-let averageMonthlyRevenuePerUser = "";
-let averageUserLifespanInMonths = "";
-let grossMargin = "";
-let profit = "";
-let percentChangeInQuantityDemanded = "";
-let percentChangeInPrice = "";
-let sellingPrice = "";
-let variableCost = "";
-let marketingCosts = "";
-let numberOfNewCustomers = "";
-let clv = "";
-let averageRetention = "";
-let numberOfLostCustomers = "";
-let totalNumberOfCustomers = "";
-let yourCompanyMetric = "";
-let industryMetric = "";
-let revenue = "";
-let costOfGoodsSold = "";
-let totalRevenue  = "";
-let numberOfOrders = "";
-let marketingSpend = "";
-let retainedCustomers = "";
-let initialCustomers = "";
-let percentPromoters = "";
-let percentDetractors = "";
-let completedActions = "";
-let totalVisitors = "";
-let percentSatisfied = "";
-let percentDissatisfied = "";
-let revenueFromAds = "";
-let costOfAdSpend = "";
-let totalClicks = "";
-let numberOfUsers = "";
-let cac = "";
-let averageInventoryValue = "";
-let ordersWithDefects = "";
-let totalOrders = "";
-let numberOfEmployees = "";
-let operatingIncome = "";
-let depreciationAmortization = "";
-let cashFromOperations = "";
-let capitalExpenditures = "";
-let totalLiabilities = "";
-let totalShareholdersEquity = "";
-let TotalCosts = "";
-let TotalNumberOfNewCustomers = ""; 
-let percentSatisfiedCustomers = ""; 
-let percentDissatisfiedCustomers = "";
-let yourCompanyConversionRate = ""; 
-let industryAverageConversionRate = ""; 
-let customerLifetimeValue = ""; 
-let customerAcquisitionCost = ""; 
-let totalRevenueForPeriod = ""; 
-let numberOfUsersForPeriod = ""; 
-let completedPurchasesFromEmail = ""; 
-let totalEmailClicks = ""; 
-let operatingIncomeForProfitMargin = 200000; 
-let revenueForProfitMargin = 1000000; 
+let costOfGoodsSoldForGross = []
+let population = []
+let targetMarketPercentage = []
+let benefits = []
+let costs = []
+let averageMonthlyRevenuePerUser = []
+let averageUserLifespanInMonths = []
+let grossMargin = []
+let profit = []
+let percentChangeInQuantityDemanded = []
+let percentChangeInPrice = []
+let sellingPrice = []
+let variableCost = []
+let marketingCosts = []
+let numberOfNewCustomers = []
+let clv = []
+let averageRetention = []
+let numberOfLostCustomers = []
+let totalNumberOfCustomers = []
+let yourCompanyMetric = []
+let industryMetric = []
+let revenue = []
+let costOfGoodsSold = []
+let totalRevenue = []
+let numberOfOrders = []
+let marketingSpend = []
+let retainedCustomers = []
+let initialCustomers = []
+let percentPromoters = []
+let percentDetractors = []
+let completedActions = []
+let totalVisitors = []
+let percentSatisfied = []
+let percentDissatisfied = []
+let revenueFromAds = []
+let costOfAdSpend = []
+let totalClicks = []
+let numberOfUsers = []
+let cac = []
+let averageInventoryValue = []
+let ordersWithDefects = []
+let totalOrders = []
+let numberOfEmployees = []
+let operatingIncome = []
+let depreciationAmortization = []
+let cashFromOperations = []
+let capitalExpenditures = []
+let totalLiabilities = []
+let totalShareholdersEquity = []
+let TotalCosts = []
+let TotalNumberOfNewCustomers = []
+let percentSatisfiedCustomers = []
+let percentDissatisfiedCustomers = []
+let yourCompanyConversionRate = []
+let industryAverageConversionRate = []
+let customerLifetimeValue = []
+let customerAcquisitionCost = []
+let totalRevenueForPeriod = []
+let numberOfUsersForPeriod = []
+let completedPurchasesFromEmail = []
+let totalEmailClicks = []
+let age = []
+let gender = []
+let language = []
+let educationLvl = []
+let investment = []
+let products = []
+let completedPurchases = []
+let totalWebsiteVisitors = []
+let operatingIncomeForProfitMargin = []
+let revenueForProfitMargin = []
 
 function loading() {
   console.log("loading");
@@ -109,8 +117,6 @@ async function checkTables() {
   return result.success; 
 }
 
-let mockDataNew = [];
-
 async function retData(){
   const response = await fetch("function/readProducts.php");
   const mockData = await response.json()
@@ -118,7 +124,6 @@ async function retData(){
 }
 
 processData();
-
 checkTables();
 
 const MSEButton = document.getElementById("market-size-estimation")
@@ -149,8 +154,34 @@ const RPEButton= document.getElementById("revenue-per-employee")
 const OPMButton= document.getElementById("operating-profit-margin")
 const EBITDAButton= document.getElementById("earnings-before-interest-taxes-depreciation-and-amortization")
 const FCFButton= document.getElementById("free-cash-flow")
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']
-// Function to create a chart
+
+let marketSize = [];
+let constBenefitAnalysisRes = [];
+let calculateCustomerLifetimeValueRes = [];
+let returnOnInvestment = [];
+let priceElasticityRes = [];
+let productMarginRes = [];
+let CACandLTVRes = [];
+let ChurnRateRes = [];
+let CompetitiveBenchmarkRes = [];
+let GrossProfitMarginRes = [];
+let AverageOrderValueRes = [];
+let CustomerAcquisitionCostRes = [];
+let CustomerRetentionRateRes = [];
+let NPSRes = [];
+let ConversionRateRes = [];
+let CSATandNSATRes = [];
+let ROASRes = [];
+let EmailConversionRateRes = [];
+let ARPURes = [];
+let LTVtoCACRatioRes = [];
+let InventoryTurnoverRateRes = [];
+let OrderDefectRateRes = [];
+let RevenuePerEmployeeRes = [];
+let OperatingProfitMarginRes = [];
+let EBITDARes = [];
+let FreeCashFlowRes = [];
+
 function createChart(ctx, type, labels, data, label) {
   return new Chart(ctx, {
     type: type,
@@ -197,104 +228,155 @@ function createChart(ctx, type, labels, data, label) {
   });
 }
 
-// Scroll animation
+// Scroll animation and search functionality
+
 const header = document.querySelector('header');
 const logo = document.querySelector('.logo');
 const searchContainer = document.getElementById('filter-search-container');
+const filterSearch = document.getElementById('filter-search');
+const searchResults = document.getElementById('search-results');
+const filters = document.getElementById('filters');
 let lastScrollTop = 0;
 
 window.addEventListener('scroll', () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  const scrollProgress = Math.min(scrollTop / 100, 1);
+  const scrollProgress =   Math.min(scrollTop / 100, 1);
 
   if (scrollTop > lastScrollTop) {
     // Scrolling down
     header.style.justifyContent = `flex-end`;
     logo.style.transform = `scale(${1 - 0.2 * scrollProgress})`;
-    searchContainer.style.opacity = `${1 - scrollProgress}`;
     searchContainer.style.transform = `translateY(${-20 * scrollProgress}px)`;
   } else {
     // Scrolling up
     header.style.justifyContent = `center`;
     logo.style.transform = `scale(1)`;
-    searchContainer.style.opacity = '1';
     searchContainer.style.transform = 'translateY(0)';
+  }
+
+  // Show search results if filters are not in view
+  if (filters.getBoundingClientRect().bottom < 0) {
+    searchResults.style.display = 'block';
+  } else {
+    searchResults.style.display = 'none';
   }
 
   lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
 
-let products = [];
+// Search functionality
+filterSearch.addEventListener('input', (e) => {
+  const searchTerm = e.target.value.toLowerCase();
+  const filterButtons = document.querySelectorAll('.filter-buttons');
+  const matchingFilters = Array.from(filterButtons).filter(button => 
+    button.value.toLowerCase().includes(searchTerm)
+  );
+
+  searchResults.innerHTML = '';
+  matchingFilters.forEach(filter => {
+    const resultElement = document.createElement('div');
+    resultElement.classList.add('search-result');
+    resultElement.textContent = filter.value;
+    resultElement.addEventListener('click', () => {
+      filter.click();
+      searchResults.style.display = 'none';
+    });
+    searchResults.appendChild(resultElement);
+  });
+
+  if (matchingFilters.length > 0 && filters.getBoundingClientRect().bottom < 0) {
+    searchResults.style.display = 'block';
+  } else {
+    searchResults.style.display = 'none';
+  }
+});
+
+// Close search results when clicking outside
+document.addEventListener('click', (e) => {
+  if (!searchContainer.contains(e.target)) {
+    searchResults.style.display = 'none';
+  }
+});
 
 async function processData() {
   try {
-    const mockData = await retData(); // Use await to get the resolved value
-    // Now you can access the mockData object and its properties here
-    console.log(mockData); // Log the entire mockData object
-    console.log(mockData[0].totalRevenue); // Access specific properties like TotalCosts
-    costOfGoodsSoldForGross =Number( mockData[0].costOfGoodsSoldForGross)
-    population =Number( mockData[0].population)
-    targetMarketPercentage =Number( mockData[0].targetMarketPercentage)
-    benefits =Number( mockData[0].benefits)
-    costs =Number( mockData[0].costs)
-    averageMonthlyRevenuePerUser =Number( mockData[0].averageMonthlyRevenuePerUser)
-    averageUserLifespanInMonths =Number( mockData[0].averageUserLifespanInMonths)
-    grossMargin =Number( mockData[0].grossMargin)
-    profit =Number( mockData[0].profit)
-    percentChangeInQuantityDemanded =Number( mockData[0].percentChangeInQuantityDemanded)
-    percentChangeInPrice =Number( mockData[0].percentChangeInPrice)
-    sellingPrice =Number( mockData[0].sellingPrice)
-    variableCost =Number( mockData[0].variableCost)
-    marketingCosts =Number( mockData[0].marketingCosts)
-    numberOfNewCustomers =Number( mockData[0].numberOfNewCustomers)
-    clv =Number( mockData[0].clv)
-    averageRetention =Number( mockData[0].averageRetention)
-    numberOfLostCustomers =Number( mockData[0].numberOfLostCustomers)
-    totalNumberOfCustomers =Number( mockData[0].totalNumberOfCustomers)
-    yourCompanyMetric =Number( mockData[0].yourCompanyMetric)
-    industryMetric =Number( mockData[0].industryMetric)
-    revenue =Number( mockData[0].revenue)
-    costOfGoodsSold =Number( mockData[0].costOfGoodsSold)
-    totalRevenue =Number( mockData[0].totalRevenue)
-    numberOfOrders =Number( mockData[0].numberOfOrders)
-    marketingSpend =Number( mockData[0].marketingSpend)
-    retainedCustomers =Number( mockData[0].retainedCustomers)
-    initialCustomers =Number( mockData[0].initialCustomers)
-    percentPromoters =Number( mockData[0].percentPromoters)
-    percentDetractors =Number( mockData[0].percentDetractors)
-    completedActions =Number( mockData[0].completedActions)
-    totalVisitors =Number( mockData[0].totalVisitors)
-    percentSatisfied =Number( mockData[0].percentSatisfied)
-    percentDissatisfied =Number( mockData[0].percentDissatisfied)
-    revenueFromAds =Number( mockData[0].revenueFromAds)
-    costOfAdSpend =Number( mockData[0].costOfAdSpend)
-    totalClicks =Number( mockData[0].totalClicks)
-    numberOfUsers =Number( mockData[0].numberOfUsers)
-    cac =Number( mockData[0].cac)
-    averageInventoryValue =Number( mockData[0].averageInventoryValue)
-    ordersWithDefects =Number( mockData[0].ordersWithDefects)
-    totalOrders =Number( mockData[0].totalOrders)
-    numberOfEmployees =Number( mockData[0].numberOfEmployees)
-    operatingIncome =Number( mockData[0].operatingIncome)
-    depreciationAmortization =Number( mockData[0].depreciationAmortization)
-    cashFromOperations =Number( mockData[0].cashFromOperations)
-    capitalExpenditures =Number( mockData[0].capitalExpenditures)
-    totalLiabilities =Number( mockData[0].totalLiabilities)
-    totalShareholdersEquity =Number( mockData[0].totalShareholdersEquity)
-    TotalCosts =Number( mockData[0].TotalCosts)
-    TotalNumberOfNewCustomers =Number( mockData[0].TotalNumberOfNewCustomers)
-    percentSatisfiedCustomers =Number( mockData[0].percentSatisfiedCustomers)
-    percentDissatisfiedCustomers =Number( mockData[0].percentDissatisfiedCustomers)
-    yourCompanyConversionRate =Number( mockData[0].yourCompanyConversionRate)
-    industryAverageConversionRate =Number( mockData[0].industryAverageConversionRate)
-    customerLifetimeValue =Number( mockData[0].customerLifetimeValue)
-    customerAcquisitionCost =Number( mockData[0].customerAcquisitionCost)
-    totalRevenueForPeriod =Number( mockData[0].totalRevenueForPeriod)
-    numberOfUsersForPeriod =Number( mockData[0].numberOfUsersForPeriod)
-    completedPurchasesFromEmail =Number( mockData[0].completedPurchasesFromEmail)
-    totalEmailClicks =Number( mockData[0].totalEmailClicks)
+    const mockData = await retData();  
+    mockData.forEach((Data)=>{
+      costOfGoodsSoldForGross.push(Number(Data.costOfGoodsSoldForGross))
+      population.push(Number(Data.population))
+      targetMarketPercentage.push(Number(Data.targetMarketPercentage))
+      benefits.push(Number(Data.benefits))
+      costs.push(Number(Data.costs))
+      averageMonthlyRevenuePerUser.push(Number(Data.averageMonthlyRevenuePerUser))
+      averageUserLifespanInMonths.push(Number(Data.averageUserLifespanInMonths))
+      grossMargin.push(Number(Data.grossMargin))
+      profit.push(Number(Data.profit))
+      percentChangeInQuantityDemanded.push(Number(Data.percentChangeInQuantityDemanded))
+      percentChangeInPrice.push(Number(Data.percentChangeInPrice))
+      sellingPrice.push(Number(Data.sellingPrice))
+      variableCost.push(Number(Data.variableCost))
+      marketingCosts.push(Number(Data.marketingCosts))
+      numberOfNewCustomers.push(Number(Data.numberOfNewCustomers))
+      clv.push(Number(Data.clv))
+      averageRetention.push(Number(Data.averageRetention))
+      numberOfLostCustomers.push(Number(Data.numberOfLostCustomers))
+      totalNumberOfCustomers.push(Number(Data.totalNumberOfCustomers))
+      yourCompanyMetric.push(Number(Data.yourCompanyMetric))
+      industryMetric.push(Number(Data.industryMetric))
+      revenue.push(Number(Data.revenue))
+      costOfGoodsSold.push(Number(Data.costOfGoodsSold))
+      totalRevenue.push(Number(Data.totalRevenue))
+      numberOfOrders.push(Number(Data.numberOfOrders))
+      marketingSpend.push(Number(Data.marketingSpend))
+      retainedCustomers.push(Number(Data.retainedCustomers))
+      initialCustomers.push(Number(Data.initialCustomers))
+      percentPromoters.push(Number(Data.percentPromoters))
+      percentDetractors.push(Number(Data.percentDetractors))
+      completedActions.push(Number(Data.completedActions))
+      totalVisitors.push(Number(Data.totalVisitors))
+      percentSatisfied.push(Number(Data.percentSatisfied))
+      percentDissatisfied.push(Number(Data.percentDissatisfied))
+      revenueFromAds.push(Number(Data.revenueFromAds))
+      costOfAdSpend.push(Number(Data.costOfAdSpend))
+      totalClicks.push(Number(Data.totalClicks))
+      numberOfUsers.push(Number(Data.numberOfUsers))
+      cac.push(Number(Data.cac))
+      averageInventoryValue.push(Number(Data.averageInventoryValue))
+      ordersWithDefects.push(Number(Data.ordersWithDefects))
+      totalOrders.push(Number(Data.totalOrders))
+      numberOfEmployees.push(Number(Data.numberOfEmployees))
+      operatingIncome.push(Number(Data.operatingIncome))
+      depreciationAmortization.push(Number(Data.depreciationAmortization))
+      cashFromOperations.push(Number(Data.cashFromOperations))
+      capitalExpenditures.push(Number(Data.capitalExpenditures))
+      totalLiabilities.push(Number(Data.totalLiabilities))
+      totalShareholdersEquity.push(Number(Data.totalShareholdersEquity))
+      TotalCosts.push(Number(Data.TotalCosts))
+      TotalNumberOfNewCustomers.push(Number(Data.TotalNumberOfNewCustomers))
+      percentSatisfiedCustomers.push(Number(Data.percentSatisfiedCustomers))
+      percentDissatisfiedCustomers.push(Number(Data.percentDissatisfiedCustomers))
+      yourCompanyConversionRate.push(Number(Data.yourCompanyConversionRate))
+      industryAverageConversionRate.push(Number(Data.industryAverageConversionRate))
+      customerLifetimeValue.push(Number(Data.customerLifetimeValue))
+      customerAcquisitionCost.push(Number(Data.customerAcquisitionCost))
+      totalRevenueForPeriod.push(Number(Data.totalRevenueForPeriod))
+      numberOfUsersForPeriod.push(Number(Data.numberOfUsersForPeriod))
+      completedPurchasesFromEmail.push(Number(Data.completedPurchasesFromEmail))
+      totalEmailClicks.push(Number(Data.totalEmailClicks))
+      age.push(Number(Data.age))
+      gender.push(Number(Data.gender))
+      language.push(Number(Data.language))
+      educationLvl.push(Number(Data.educationLvl))
+      investment.push(Number(Data.investment))
+      products.push(Number(Data.products))
+      completedPurchases.push(Number(Data.completedPurchases))
+      totalWebsiteVisitors.push(Number(Data.totalWebsiteVisitors))
+      operatingIncomeForProfitMargin.push(Number(Data.operatingIncomeForProfitMargin))
+      revenueForProfitMargin.push(Number(Data.revenueForProfitMargin))
+    })
 
     function estimateMarketSize(population, targetMarketPercentage) {
+
       if (
         typeof population !== "number" ||
         typeof targetMarketPercentage !== "number"
@@ -306,30 +388,34 @@ async function processData() {
         return "Invalid input: Target market percentage must be between 0 and 100.";
       }
     
-      const marketSize = population * (targetMarketPercentage / 100);
-      return marketSize;
+      return population * (targetMarketPercentage / 100);
     }
     
-    
     MSEButton.addEventListener("click", ()=>{
-      const estimatedSize = estimateMarketSize(population, targetMarketPercentage);
-      if (typeof estimatedSize === "number") {
-        console.log("Estimated market size:", estimatedSize);
-      } else {
-        console.error(estimatedSize);
+      for (let i = 0; i < population.length; i++) {
+        const result = estimateMarketSize(population[i], targetMarketPercentage[i]);
+      
+        if (typeof result === "number") {
+          marketSize[i] = result; 
+        } else {
+          console.error(result, "for index:", i);  
+          marketSize[i] = null; 
+        }
       }
-    
+
+      const chartLabels = marketSize.map((value, index) => `Value ${index + 1}`); 
+
       const card = document.createElement('div')
       card.classList.add('canvas-container')
       const canvas = document.createElement('canvas')
-      canvas.id = 'MarketSizeEstimation'
-      canvas.ariaLabel = 'Market Size Estimation Chart'
-      canvas.role = 'img'
-      card.appendChild(canvas)
-      document.getElementById('main-content').appendChild(card)
+        canvas.id = 'MarketSizeEstimation'
+        canvas.ariaLabel = 'Market Size Estimation Chart'
+        canvas.role = 'img'
+        card.appendChild(canvas)
+        document.getElementById('main-content').appendChild(card)
     
       const MarketSizeEstimationCtx = document.getElementById('MarketSizeEstimation').getContext('2d');
-      createChart(MarketSizeEstimationCtx, 'bar', ['Population', 'Annually'], [population, targetMarketPercentage], 'Market Size Estimation'); 
+      createChart(MarketSizeEstimationCtx, 'bar', chartLabels, marketSize, 'Market Size Estimation'); 
     })
     
     function calculateCostBenefitAnalysis(benefits, costs) {
@@ -341,18 +427,22 @@ async function processData() {
         return "Invalid input: Benefits cannot be zero.";
       }
     
-      return costBenefitRatio;
+      return ((benefits - costs) / benefits) * 100;
     }
     
-    
     CBAButton.addEventListener("click", ()=>{
-      const costBenefitResult = ((benefits - costs) / benefits) * 100;
+      for (let i = 0; i < benefits.length; i++) {
+        const result = calculateCostBenefitAnalysis(benefits[i], costs[i]);
       
-      if (typeof costBenefitResult === "number") {
-        console.log("Cost-Benefit Analysis Result:", costBenefitResult + "%");
-      } else {
-        console.error(costBenefitResult);
+        if (typeof result === "number") {
+          constBenefitAnalysisRes[i] = result; 
+        } else {
+          console.error(result, "for index:", i);  
+          constBenefitAnalysisRes[i] = null; 
+        }
       }
+
+      const chartLabels = constBenefitAnalysisRes.map((value, index) => `Value ${index + 1}`); 
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -364,7 +454,7 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const CustomerBenefitAnalysisCtx = document.getElementById('CustomerBenefitAnalysis').getContext('2d');
-      createChart(CustomerBenefitAnalysisCtx, 'pie', ['costs', 'benefits'], [costs, benefits], 'Customer Benefit Analysis');
+      createChart(CustomerBenefitAnalysisCtx, 'pie', chartLabels, constBenefitAnalysisRes, 'Customer Benefit Analysis');
       
     })
     
@@ -385,26 +475,23 @@ async function processData() {
         return "Invalid input: Gross margin cannot be zero.";
       }
     
-      const clv =
-        (averageMonthlyRevenuePerUser * averageUserLifespanInMonths) / grossMargin;
+      return (averageMonthlyRevenuePerUser * averageUserLifespanInMonths) / grossMargin;
     
-      return clv;
     }
     
-    
-    
     CLVButton.addEventListener('click', ()=> {
-      const TotalCustomerLifetimeValue = calculateCustomerLifetimeValue(
-        averageMonthlyRevenuePerUser,
-        averageUserLifespanInMonths,
-        grossMargin
-      );
+      for (let i = 0; i < averageMonthlyRevenuePerUser.length; i++) {
+        const result = calculateCustomerLifetimeValue(averageMonthlyRevenuePerUser[i],averageUserLifespanInMonths[i],grossMargin[i]);
       
-      if (typeof TotalCustomerLifetimeValue === "number") {
-        console.log("Customer Lifetime Value:", TotalCustomerLifetimeValue);
-      } else {
-        console.error(TotalCustomerLifetimeValue);
+        if (typeof result === "number") {
+          calculateCustomerLifetimeValueRes[i] = result; 
+        } else {
+          console.error(result, "for index:", i);  
+          calculateCustomerLifetimeValueRes[i] = null; 
+        }
       }
+
+      const chartLabels = calculateCustomerLifetimeValueRes.map((value, index) => `Value ${index + 1}`); 
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -416,11 +503,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const CustomerLifetimeValueCtx = document.getElementById('CustomerLifetimeValue').getContext('2d');
-      createChart(CustomerLifetimeValueCtx, 'scatter', ['averageMonthlyRevenuePerUser', 'averageUserLifespanInMonths', 'grossMargin'], [averageMonthlyRevenuePerUser, averageUserLifespanInMonths, grossMargin], 'Customer Lifetime Value');
+      createChart(CustomerLifetimeValueCtx, 'line', chartLabels, calculateCustomerLifetimeValueRes, 'Customer Lifetime Value');
     })
     
     function calculateROI(profit, costs) {
-      // Validate inputs (optional, but recommended)
       if (typeof profit !== "number" || typeof costs !== "number") {
         return "Invalid input: Profit and costs must be numbers.";
       }
@@ -429,22 +515,24 @@ async function processData() {
         return "Invalid input: Costs cannot be zero.";
       }
     
-      // Calculate ROI
-      const roi = ((profit - costs) / costs) * 100;
-    
-      return roi;
+      return ((profit - costs) / costs) * 100;
     }
     
-    
     ROIButton.addEventListener('click', ()=> {
-      const roiResult = calculateROI(profit, costs);
-      
-      if (typeof roiResult === "number") {
-        console.log("Return on Investment (ROI):", roiResult + "%");
-      } else {
-        console.error(roiResult);
+      for (let i = 0; i < profit.length; i++) {
+        const result = calculateROI(profit[i], costs[i]);
+        
+        if (typeof result === "number") {
+          returnOnInvestment[i] = result;
+          console.log("Return on Investment (ROI):", result + "%");
+        } else {
+          console.error(result);
+          returnOnInvestment[i] = null;
+        }
       }
     
+      const chartLabels = returnOnInvestment.map((value, index) => `Value ${index + 1}`); 
+
       const card = document.createElement('div')
       card.classList.add('canvas-container')
       const canvas = document.createElement('canvas')
@@ -455,14 +543,13 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const returnOnInvestmentCtx = document.getElementById('returnOnInvestment').getContext('2d');
-      createChart(returnOnInvestmentCtx, 'bar', ['profit', 'costs'], [profit, costs], 'Return On Investment');
+      createChart(returnOnInvestmentCtx, 'radar', chartLabels, returnOnInvestment, 'Return On Investment');
     })
     
     function calculatePriceElasticity(
       percentChangeInQuantityDemanded,
       percentChangeInPrice
     ) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof percentChangeInQuantityDemanded !== "number" ||
         typeof percentChangeInPrice !== "number"
@@ -474,25 +561,29 @@ async function processData() {
         return "Invalid input: Percent change in price cannot be zero.";
       }
     
-      // Calculate price elasticity
-      const priceElasticity =
-        percentChangeInQuantityDemanded / percentChangeInPrice;
-    
-      return priceElasticity;
+      return  percentChangeInQuantityDemanded / percentChangeInPrice;
     }
     
-    
     PEButton.addEventListener('click', ()=>{
-      const elasticity = calculatePriceElasticity(
-        percentChangeInQuantityDemanded,
-        percentChangeInPrice
-      );
-      
-      if (typeof elasticity === "number") {
-        console.log("Price Elasticity of Demand:", elasticity);
-      } else {
-        console.error(elasticity); // Display error message if inputs were invalid
+      for (let i = 0; i < percentChangeInQuantityDemanded.length; i++) {
+        const result = calculatePriceElasticity(
+          percentChangeInQuantityDemanded[i],
+          percentChangeInPrice[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Price Elasticity of Demand:", result);
+          priceElasticityRes[i] = result
+        } else {
+          console.error(result); 
+          priceElasticityRes[i] = null
+        }
       }
+    
+      const chartLabels = priceElasticityRes.map((value, index) => `Value ${index + 1}`); 
+
+      
+      
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -504,31 +595,32 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const PriceElasticityCtx = document.getElementById('PriceElasticity').getContext('2d');
-      createChart(PriceElasticityCtx, 'bar', ['ChangeInQuantityDemanded', 'percentChangeInPrice'], [percentChangeInQuantityDemanded, percentChangeInPrice], 'Price Elasticity Chart');
+      createChart(PriceElasticityCtx, 'bar', chartLabels, priceElasticityRes, 'Price Elasticity Chart');
     })
     
     function calculateProductMargin(sellingPrice, variableCost) {
-      // Validate inputs (optional, but recommended)
       if (typeof sellingPrice !== "number" || typeof variableCost !== "number") {
         return "Invalid input: Selling price and variable cost must be numbers.";
       }
     
-      // Calculate gross profit (product margin)
-      const grossProfit = sellingPrice - variableCost;
-    
-      return grossProfit;
+      return sellingPrice - variableCost;
     }
     
-    
     PMButton.addEventListener('click', ()=>{
-      const productMargin = calculateProductMargin(sellingPrice, variableCost);
-      
-      if (typeof productMargin === "number") {
-        console.log("Gross Profit (Product Margin):", productMargin);
-      } else {
-        console.error(productMargin); // Display error message if inputs were invalid
+      for(let i = 0; i < sellingPrice.length; i++) {
+        const result = calculateProductMargin(sellingPrice[i], variableCost[i]);
+        
+        if (typeof result === "number") {
+          console.log("Gross Profit (Product Margin):", result);
+          productMarginRes[i] = result;
+        } else {
+          console.error(result); 
+          productMarginRes[i] = null;
+        }
       }
-    
+      
+      const chartLabels = productMarginRes.map((value, index) => `Value ${index + 1}`);
+
       const card = document.createElement('div')
       card.classList.add('canvas-container')
       const canvas = document.createElement('canvas')
@@ -539,44 +631,8 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const productMarginCtx = document.getElementById('productMargin').getContext('2d');
-      createChart(productMarginCtx, 'bar', ['sellingPrice', 'variableCost'], [sellingPrice, variableCost], 'Product Margin');
+      createChart(productMarginCtx, 'bar',chartLabels, productMarginRes, 'Product Margin');
     })
-    
-    
-    // function forecastSales(pastSalesData, trendAnalysisMethod, seasonalityAdjustmentMethod) {
-    //   // 1. Trend Analysis
-    //   const trendComponent = trendAnalysisMethod(pastSalesData);
-    
-    //   // 2. Seasonality Adjustment
-    //   const seasonalityComponent = seasonalityAdjustmentMethod(pastSalesData);
-    
-    //   // 3. Combine Components for Forecast
-    //   const forecast = [];
-    //   for (let i = 0; i < futurePeriods; i++) { // Adjust futurePeriods as needed
-    //     // Combine trend, seasonality, and possibly other factors (e.g., base sales)
-    //     forecast[i] = trendComponent[i] * seasonalityComponent[i]; // Example combination
-    //   }
-    
-    //   return forecast;
-    // }
-    
-    // // Example usage (illustrative, replace with actual methods)
-    // const pastSalesData = [/* Your historical sales data */];
-    
-    // // function simpleMovingAverageTrend(data) {
-    // //   // Implement your simple moving average logic here
-    // //   // ...
-    // //   return trendComponent;
-    // // }
-    
-    // // function multiplicativeSeasonality(data) {
-    // //   // Implement your multiplicative seasonality adjustment logic here
-    // //   // ...
-    // //   return seasonalityComponent;
-    // // }
-    
-    // const forecast = forecastSales(pastSalesData, simpleMovingAverageTrend, multiplicativeSeasonality);
-    // console.log("Sales Forecast:", forecast);
     
     function calculateCACandLTV(
       marketingCosts,
@@ -584,7 +640,6 @@ async function processData() {
       clv,
       averageRetention
     ) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof marketingCosts !== "number" ||
         typeof numberOfNewCustomers !== "number" ||
@@ -598,34 +653,36 @@ async function processData() {
         return "Invalid input: Number of new customers cannot be zero.";
       }
     
-      // Calculate CAC
       const cac = marketingCosts / numberOfNewCustomers;
     
-      // Calculate LTV
       const ltv = clv * averageRetention;
     
-      // Return both values
       return { cac: cac, ltv: ltv };
     }
     
-    // Example usage:
-    
-    
     CACCLVButton.addEventListener('click',()=>{
-      const finalResults = calculateCACandLTV(
-        marketingCosts,
-        TotalNumberOfNewCustomers,
-        clv,
-        averageRetention
-      );
-      
-      if (typeof finalResults === "object") {
-        console.log("Customer Acquisition Cost (CAC):", finalResults.cac);
-        console.log("Lifetime Value (LTV):", finalResults.ltv);
-      } else {
-        console.error(finalResults); // Display error message if inputs were invalid
+      for(let i = 0; i < marketingCosts.length; i++) {
+        const result = calculateCACandLTV(
+          marketingCosts[i],
+          TotalNumberOfNewCustomers[i],
+          clv[i],
+          averageRetention[i]
+        );
+        
+        if (typeof result === "object") {
+          console.log("Customer Acquisition Cost (CAC):", result.cac);
+          console.log("Lifetime Value (LTV):", result.ltv);
+          CACandLTVRes[i] = result.cac;
+          CACandLTVRes[i] = result.ltv;
+        } else {
+          console.error(result); 
+          CACandLTVRes[i] = null;
+          CACandLTVRes[i] = null;
+        }
       }
-    
+
+      const chartLabels = CACandLTVRes.map((value, index) => `Value ${index + 1}`);
+
       const card = document.createElement('div')
       card.classList.add('canvas-container')
       const canvas = document.createElement('canvas')
@@ -636,11 +693,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerAcquisitionCostCustomerLifetimeValueCtx = document.getElementById('customerAcquisitionCostCustomerLifetimeValue').getContext('2d');
-      createChart(customerAcquisitionCostCustomerLifetimeValueCtx, 'pie', ['Customer Acquisition Cost', 'Customer Lifetime Value'], [finalResults.cac,finalResults.ltv], 'Customer Acquisition Cost & Customer Lifetime Value Ratio');
+      createChart(customerAcquisitionCostCustomerLifetimeValueCtx, 'pie', chartLabels, CACandLTVRes, 'Customer Acquisition Cost & Customer Lifetime Value Ratio');
     })
     
     function calculateChurnRate(numberOfLostCustomers, totalNumberOfCustomers) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof numberOfLostCustomers !== "number" ||
         typeof totalNumberOfCustomers !== "number"
@@ -652,26 +708,26 @@ async function processData() {
         return "Invalid input: Total number of customers cannot be zero.";
       }
     
-      // Calculate churn rate
-      const churnRate = (numberOfLostCustomers / totalNumberOfCustomers) * 100;
-    
-      return churnRate;
+      return (numberOfLostCustomers / totalNumberOfCustomers) * 100;
     }
     
-    // Example usage:
-    
-    
     CRButton.addEventListener('click', ()=>{
-      const churnRateResult = calculateChurnRate(
-        numberOfLostCustomers,
-        totalNumberOfCustomers
-      );
-      
-      if (typeof churnRateResult === "number") {
-        console.log("Churn Rate:", churnRateResult + "%");
-      } else {
-        console.error(churnRateResult); // Display error message if inputs were invalid
+      for (let i = 0; i < numberOfLostCustomers.length; i++) {
+        const result = calculateChurnRate(
+          numberOfLostCustomers[i],
+          totalNumberOfCustomers[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Churn Rate:", result + "%");
+          ChurnRateRes[i] = result;
+        } else {
+          console.error(result); 
+          ChurnRateRes[i] = null;
+        }
       }
+
+      const chartLabels = ChurnRateRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -683,11 +739,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const churnRateCtx = document.getElementById('churnRate').getContext('2d');
-      createChart(churnRateCtx, 'pie', ['Total Number of Customers', 'Number of Lost Customer'], [totalNumberOfCustomers, numberOfLostCustomers], 'Churn Rate');
+      createChart(churnRateCtx, 'pie', chartLabels, ChurnRateRes, 'Churn Rate');
     })
     
     function calculateCompetitiveBenchmark(yourCompanyMetric, industryMetric) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof yourCompanyMetric !== "number" ||
         typeof industryMetric !== "number"
@@ -699,34 +754,34 @@ async function processData() {
         return "Invalid input: Industry metric cannot be zero.";
       }
     
-      // Calculate competitive benchmark
-      const benchmark = (yourCompanyMetric - industryMetric) / industryMetric;
-    
-      return benchmark;
+      return (yourCompanyMetric - industryMetric) / industryMetric;
     }
     
-    // Example usage:
-    
-    
     CBButton.addEventListener('click', ()=>{
-      const benchmarkResult = calculateCompetitiveBenchmark(
-        yourCompanyConversionRate,
-        industryAverageConversionRate
-      );
-      
-      if (typeof benchmarkResult === "number") {
-        console.log("Competitive Benchmark:", benchmarkResult);
-        if (benchmarkResult > 0) {
-          console.log("Your company is performing better than the industry average.");
-        } else if (benchmarkResult < 0) {
-          console.log("Your company is performing worse than the industry average.");
+      for (let i = 0; i < yourCompanyConversionRate.length; i++) {
+        const result = calculateCompetitiveBenchmark(
+          yourCompanyConversionRate[i],
+          industryAverageConversionRate[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Competitive Benchmark:", result);
+          CompetitiveBenchmarkRes[i] = result;
+          if (result > 0) {
+            console.log("Your company is performing better than the industry average.");
+          } else if (result < 0) {
+            console.log("Your company is performing worse than the industry average.");
+          } else {
+            console.log("Your company is performing at the industry average.");
+          }
         } else {
-          console.log("Your company is performing at the industry average.");
+          console.error(result); 
+          CompetitiveBenchmarkRes[i] = null;
         }
-      } else {
-        console.error(benchmarkResult); // Display error message if inputs were invalid
       }
-    
+      
+      const chartLabels = CompetitiveBenchmarkRes.map((value, index) => `Value ${index + 1}`);
+      
       const card = document.createElement('div')
       card.classList.add('canvas-container')
       const canvas = document.createElement('canvas')
@@ -737,11 +792,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const competitiveBenchmarkCtx = document.getElementById('competitiveBenchmark').getContext('2d');
-      createChart(competitiveBenchmarkCtx, 'bar', ['Your Conversion Rate', 'Industry Average Conversion Rate'], [yourCompanyConversionRate, industryAverageConversionRate], 'Competitive Benchmark');
+      createChart(competitiveBenchmarkCtx, 'bar', chartLabels, CompetitiveBenchmarkRes, 'Competitive Benchmark');
     })
     
-    function calculateGrossProfitMargin(revenue, costOfGoodsSoldForGross) {
-      // Validate inputs (optional, but recommended)
+    function calculateGrossProfitMargin(revenue, costOfGoodsSold) {
       if (typeof revenue !== "number" || typeof costOfGoodsSold !== "number") {
         return "Invalid input: Revenue and cost of goods sold must be numbers.";
       }
@@ -750,28 +804,26 @@ async function processData() {
         return "Invalid input: Revenue cannot be zero.";
       }
     
-      // Calculate gross profit margin
-      const grossProfitMargin = ((revenue - costOfGoodsSold) / revenue) * 100;
-    
-      // const revenue = 50000; // Example revenue
-      // const costOfGoodsSold = 30000; // Example cost of goods sold
-    
-      return grossProfitMargin;
+      return ((revenue - costOfGoodsSold) / revenue) * 100;
     }
     
-    
-    
     GPMButton.addEventListener('click', ()=>{
-      const grossProfitMarginResult = calculateGrossProfitMargin(
-        revenue,
-        costOfGoodsSoldForGross
-      );
-      
-      if (typeof grossProfitMarginResult === "number") {
-        console.log("Gross Profit Margin:", grossProfitMarginResult + "%");
-      } else {
-        console.error(grossProfitMarginResult); // Display error message if inputs were invalid
+      for(let i = 0; i < revenue.length; i++) {
+        const result = calculateGrossProfitMargin(
+          revenue[i],
+          costOfGoodsSold[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Gross Profit Margin:", result + "%");
+          GrossProfitMarginRes[i] = result;
+        } else {
+          console.error(result); 
+          GrossProfitMarginRes[i]= null
+        }
       }
+
+      const chartLabels = GrossProfitMarginRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -783,11 +835,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const grossProfitMarginCtx = document.getElementById('grossProfitMargin').getContext('2d');
-      createChart(grossProfitMarginCtx, 'bar', ['Revenue', 'Cost of Goods Sold'], [revenue, costOfGoodsSoldForGross], 'Gross Profit Margin');
+      createChart(grossProfitMarginCtx, 'bar', chartLabels, GrossProfitMarginRes, 'Gross Profit Margin');
     })
     
     function calculateAverageOrderValue(totalRevenue, numberOfOrders) {
-      // Validate inputs (optional, but recommended)
       if (typeof totalRevenue !== "number" || typeof numberOfOrders !== "number") {
         return "Invalid input: Total revenue and number of orders must be numbers.";
       }
@@ -795,23 +846,26 @@ async function processData() {
       if (numberOfOrders === 0) {
         return "Invalid input: Number of orders cannot be zero.";
       }
-      // Calculate average order value
-      const averageOrderValue = totalRevenue / numberOfOrders;
-    
-      return averageOrderValue;
+      return totalRevenue / numberOfOrders;    
     }
     
     AOVButton.addEventListener('click', ()=>{
-      const averageOrderValueResult = calculateAverageOrderValue(
-        totalRevenue,
-        numberOfOrders
-      );
-      
-      if (typeof averageOrderValueResult === "number") {
-        console.log("Average Order Value:", averageOrderValueResult);
-      } else {
-        console.error(averageOrderValueResult); // Display error message if inputs were invalid
+      for(let i = 0; i < totalRevenue.length; i++) {
+        const result = calculateAverageOrderValue(
+          totalRevenue[i],
+          numberOfOrders[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Average Order Value:", result);
+          AverageOrderValueRes[i] = result;
+        } else {
+          console.error(result); 
+          AverageOrderValueRes[i] = null;
+        }
       }
+
+      const chartLabels = AverageOrderValueRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -823,14 +877,13 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const averageOrderValueCtx = document.getElementById('averageOrderValue').getContext('2d');
-      createChart(averageOrderValueCtx, 'line', ['Total Revenue', 'Number of Orders'], [totalRevenue, numberOfOrders], 'Average Order Value');
+      createChart(averageOrderValueCtx, 'line', chartLabels, AverageOrderValueRes, 'Average Order Value');
     })
     
     function calculateCustomerAcquisitionCost(
       marketingSpend,
       numberOfNewCustomers
     ) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof marketingSpend !== "number" ||
         typeof numberOfNewCustomers !== "number"
@@ -842,25 +895,26 @@ async function processData() {
         return "Invalid input: Number of new customers cannot be zero.";
       }
     
-      // Calculate customer acquisition cost
-      const customerAcquisitionCost = marketingSpend / numberOfNewCustomers;
-    
-      return customerAcquisitionCost;
-    }
-    
-    
+      return marketingSpend / numberOfNewCustomers;
+      }
     
     CACButton.addEventListener('click', ()=>{
-      const cacResult = calculateCustomerAcquisitionCost(
-        marketingSpend,
-        numberOfNewCustomers
-      );
-      
-      if (typeof cacResult === "number") {
-        console.log("Customer Acquisition Cost (CAC):", cacResult);
-      } else {
-        console.error(cacResult); // Display error message if inputs were invalid
+      for(let i = 0; i < marketingSpend.length; i++) {
+        const result = calculateCustomerAcquisitionCost(
+          marketingSpend[i],
+          numberOfNewCustomers[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Customer Acquisition Cost (CAC):", result);
+          CustomerAcquisitionCostRes[i] = result;
+        } else {
+          console.error(result); 
+          CustomerAcquisitionCostRes[i] = null;
+        }
       }
+
+      const chartLabels = CustomerAcquisitionCostRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -872,11 +926,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerAcquisitionCostCtx = document.getElementById('customerAcquisitionCost').getContext('2d');
-      createChart(customerAcquisitionCostCtx, 'line', ['Marketing Spend', 'Number of New Customers'], [marketingSpend, numberOfNewCustomers], 'Customer Acquisition Cost');
+      createChart(customerAcquisitionCostCtx, 'line', chartLabels, CustomerAcquisitionCostRes, 'Customer Acquisition Cost');
     })
     
     function calculateCustomerRetentionRate(retainedCustomers, initialCustomers) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof retainedCustomers !== "number" ||
         typeof initialCustomers !== "number"
@@ -888,27 +941,27 @@ async function processData() {
         return "Invalid input: Initial number of customers cannot be zero.";
       }
     
-      // Calculate customer retention rate
-      const retentionRate = retainedCustomers / initialCustomers;
-    
-      return retentionRate;
+      return retainedCustomers / initialCustomers;
     }
     
-    
     CRRButton.addEventListener('click', ()=>{
-      const retentionRateResult = calculateCustomerRetentionRate(
-        retainedCustomers,
-        initialCustomers
-      );
-      
-      if (typeof retentionRateResult === "number") {
-        console.log("Customer Retention Rate:", retentionRateResult);
-        console.log(
-          "Customer Retention Rate Percentage:",
-          retentionRateResult * 100 + "%"
+      for(let i = 0; i < retainedCustomers.length; i++) {
+        const result = calculateCustomerRetentionRate(
+          retainedCustomers[i],
+          initialCustomers[i]
         );
-      } else {
-        console.error(retentionRateResult); // Display error message if inputs were invalid
+        
+        if (typeof result === "number") {
+          console.log("Customer Retention Rate:", result);
+          console.log(
+            "Customer Retention Rate Percentage:",
+            result * 100 + "%"
+          );
+          CustomerRetentionRateRes[i] = result;
+        } else {
+          console.error(result); 
+          CustomerRetentionRateRes[i] = null;
+        }
       }
     
       const card = document.createElement('div')
@@ -925,7 +978,6 @@ async function processData() {
     })
     
     function calculateNPS(percentPromoters, percentDetractors) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof percentPromoters !== "number" ||
         typeof percentDetractors !== "number"
@@ -942,22 +994,23 @@ async function processData() {
         return "Invalid input: Percentages must be between 0 and 100.";
       }
     
-      // Calculate NPS
-      const nps = ((percentPromoters - percentDetractors) / 100) * 1000;
-    
-      return nps;
+      return ((percentPromoters - percentDetractors) / 100) * 1000; 
     }
-    
-    
-    
+
     NPSButton.addEventListener('click', ()=>{
-      const npsResult = calculateNPS(percentPromoters, percentDetractors);
-      
-      if (typeof npsResult === "number") {
-        console.log("Net Promoter Score (NPS):", npsResult);
-      } else {
-        console.error(npsResult); // Display error message if inputs were invalid
+      for(let i = 0; i < percentPromoters.length; i++) {
+        const result = calculateNPS(percentPromoters[i], percentDetractors[i]);
+        
+        if (typeof result === "number") {
+          console.log("Net Promoter Score (NPS):", result);
+          NPSRes[i] = result;
+        } else {
+          console.error(result); 
+          NPSRes[i] = null;
+        }
       }
+
+      const chartLabels = NPSRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -969,11 +1022,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const netPromoterScoreCtx = document.getElementById('netPromoterScore').getContext('2d');
-      createChart(netPromoterScoreCtx, 'pie', ['Percent Promoters', 'Percent Detractors'], [percentPromoters, percentDetractors], 'Net Promoter Score');
+      createChart(netPromoterScoreCtx, 'pie', chartLabels, NPSRes, 'Net Promoter Score');
     })
     
     function calculateConversionRate(completedActions, totalVisitors) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof completedActions !== "number" ||
         typeof totalVisitors !== "number"
@@ -985,26 +1037,26 @@ async function processData() {
         return "Invalid input: Total number of visitors cannot be zero.";
       }
     
-      // Calculate conversion rate
-      const conversionRate = (completedActions / totalVisitors) * 100;
-    
-      return conversionRate;
+      return (completedActions / totalVisitors) * 100;
     }
     
-    const completedPurchases = 150; // Example: 150 visitors made a purchase
-    const totalWebsiteVisitors = 10000; // Example: 10000 visitors came to the website
-    
     WCRButton.addEventListener('click', ()=>{
-      const conversionRateResult = calculateConversionRate(
-        completedPurchases,
-        totalWebsiteVisitors
-      );
-      
-      if (typeof conversionRateResult === "number") {
-        console.log("Website Conversion Rate:", conversionRateResult + "%");
-      } else {
-        console.error(conversionRateResult); // Display error message if inputs were invalid
+      for(let i = 0; i < completedPurchases.length; i++) {
+        const conversionRateResult = calculateConversionRate(
+          completedPurchases[i],
+          totalWebsiteVisitors[i]
+        );
+        
+        if (typeof conversionRateResult === "number") {
+          console.log("Website Conversion Rate:", conversionRateResult + "%");
+          ConversionRateRes[i] = conversionRateResult;
+        } else {
+          console.error(conversionRateResult); 
+          ConversionRateRes[i] = null;
+        }
       }
+
+      const chartLabels = ConversionRateRes.map((value, index) => `Value ${index + 1}`);
 
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1016,11 +1068,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const websiteConversionRateCtx = document.getElementById('websiteConversionRate').getContext('2d');
-      createChart(websiteConversionRateCtx, 'pie', ['Completed Purchases', 'Total Website Visitors'], [completedPurchases, totalWebsiteVisitors], 'Website Conversion Rate');
+      createChart(websiteConversionRateCtx, 'pie', chartLabels, ConversionRateRes, 'Website Conversion Rate');
     })
     
     function calculateCSATandNSAT(percentSatisfied, percentDissatisfied) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof percentSatisfied !== "number" ||
         typeof percentDissatisfied !== "number"
@@ -1037,24 +1088,30 @@ async function processData() {
         return "Invalid input: Percentages must be between 0 and 100.";
       }
     
-      // Calculate NSAT
       const nsat = percentSatisfied - percentDissatisfied;
     
       return { csat: percentSatisfied, nsat: nsat };
     }
     
     CSNSButton.addEventListener('click', ()=>{
-
-      const results = calculateCSATandNSAT(
-        percentSatisfiedCustomers,
-        percentDissatisfiedCustomers
-      );
-      
-      if (typeof results === "object") {
-        console.log("Customer Satisfaction (CSAT):", results.csat + "%");
-        console.log("Net Satisfaction (NSAT):", results.nsat);
-      } else {
-        console.error(results); // Display error message if inputs were invalid
+      for(let i = 0; i < percentSatisfiedCustomers.length; i++) {
+        const results = calculateCSATandNSAT(
+          percentSatisfiedCustomers[i],
+          percentDissatisfiedCustomers[i]
+        );
+        console.log(results);
+        if (typeof results === "object") {
+          console.log("Customer Satisfaction (CSAT):", results.csat + "%");
+          console.log("Net Satisfaction (NSAT):", results.nsat);
+          CSATandNSATRes.push({
+            csat: results.csat,
+            nsat: results.nsat
+          })
+        } else {
+          console.error(results); 
+          CSATandNSATRes.csat[i] = null;
+          CSATandNSATRes.nsat[i] = null;
+        }
       }
 
       const card = document.createElement('div')
@@ -1071,7 +1128,6 @@ async function processData() {
     })
     
     function calculateROAS(revenueFromAds, costOfAdSpend) {
-      // Validate inputs (optional, but recommended)
       if (typeof revenueFromAds !== "number" || typeof costOfAdSpend !== "number") {
         return "Invalid input: Revenue and cost must be numbers.";
       }
@@ -1080,21 +1136,24 @@ async function processData() {
         return "Invalid input: Cost of ad spend cannot be zero.";
       }
     
+      return (revenueFromAds - costOfAdSpend) / costOfAdSpend;
     
-      // Calculate ROAS
-      const roas = (revenueFromAds - costOfAdSpend) / costOfAdSpend;
-    
-      return roas;
     }
     
     RAPButton.addEventListener('click', ()=>{
-      const roasResult = calculateROAS(revenueFromAds, costOfAdSpend);
-      
-      if (typeof roasResult === "number") {
-        console.log("Return on Ad Spend (ROAS):", roasResult);
-      } else {
-        console.error(roasResult); // Display error message if inputs were invalid
+      for(let i = 0; i < revenueFromAds.length; i++) {
+        const result = calculateROAS(revenueFromAds[i], costOfAdSpend[i]);
+        
+        if (typeof result === "number") {
+          console.log("Return on Ad Spend (ROAS):", result);
+          ROASRes[i] = result;
+        } else {
+          console.error(result);
+          ROASRes[i] = null;
+        }
       }
+
+      const chartLabels = ROASRes.map((value, index) => `Value ${index + 1}`);
 
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1106,12 +1165,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const returnOnAdSpendCtx = document.getElementById('returnOnAdSpend').getContext('2d');
-      createChart(returnOnAdSpendCtx, 'pie', ['Revenue From Ads', 'Cost of Ad Spend'], [revenueFromAds, costOfAdSpend], 'Return on Ad Spend');
+      createChart(returnOnAdSpendCtx, 'pie', chartLabels, ROASRes, 'Return on Ad Spend');
     })
 
-    
     function calculateEmailConversionRate(completedActions, totalClicks) {
-      // Validate inputs (optional, but recommended)
       if (typeof completedActions !== "number" || typeof totalClicks !== "number") {
         return "Invalid input: Completed actions and total clicks must be numbers.";
       }
@@ -1120,29 +1177,29 @@ async function processData() {
         return "Invalid input: Total number of clicks cannot be zero.";
       }
     
-      // Calculate email marketing conversion rate
-      const conversionRate = (completedActions / totalClicks) * 100;
-    
-      return conversionRate;
+      return (completedActions / totalClicks) * 100;
     }
     
-    // Example usage:
-    
-    
     EMCRButton.addEventListener('click', ()=>{
-      const emailConversionRateResult = calculateEmailConversionRate(
-        completedPurchasesFromEmail,
-        totalEmailClicks
-      );
-      
-      if (typeof emailConversionRateResult === "number") {
-        console.log(
-          "Email Marketing Conversion Rate:",
-          emailConversionRateResult + "%"
+      for(let i = 0; i < completedPurchasesFromEmail.length; i++) {
+        const result = calculateEmailConversionRate(
+          completedPurchasesFromEmail[i],
+          totalEmailClicks[i]
         );
-      } else {
-        console.error(emailConversionRateResult); // Display error message if inputs were invalid
+        
+        if (typeof result === "number") {
+          console.log(
+            "Email Marketing Conversion Rate:",
+            result + "%"
+          );
+          EmailConversionRateRes[i] = result;
+        } else {
+          console.error(result); 
+          EmailConversionRateRes[i] = null;
+        }
       }
+
+      const chartLabels = EmailConversionRateRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1154,12 +1211,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const emailMarketingConversionRateCtx = document.getElementById('emailMarketingConversionRate').getContext('2d');
-      createChart(emailMarketingConversionRateCtx, 'line', ['Completed Purchases', 'Total Email Clicks'], [completedPurchasesFromEmail, totalEmailClicks], 'Email Marketing Conversion Rate');
+      createChart(emailMarketingConversionRateCtx, 'line', chartLabels, EmailConversionRateRes, 'Email Marketing Conversion Rate');
     })
     
-    
     function calculateARPU(totalRevenue, numberOfUsers) {
-      // Validate inputs (optional, but recommended)
       if (typeof totalRevenue !== "number" || typeof numberOfUsers !== "number") {
         return "Invalid input: Total revenue and number of users must be numbers.";
       }
@@ -1168,23 +1223,23 @@ async function processData() {
         return "Invalid input: Number of users cannot be zero.";
       }
     
-      // Calculate ARPU
-      const arpu = totalRevenue / numberOfUsers;
-    
-      return arpu;
+      return totalRevenue / numberOfUsers;
     }
     
-    // Example usage:
-    
-    
     ARPUButton.addEventListener('click', ()=>{
-      const arpuResult = calculateARPU(totalRevenueForPeriod, numberOfUsersForPeriod);
-      
-      if (typeof arpuResult === "number") {
-        console.log("Average Revenue Per User (ARPU):", arpuResult);
-      } else {
-        console.error(arpuResult); // Display error message if inputs were invalid
+      for(let i = 0; i < totalRevenueForPeriod.length; i++) {
+        const result = calculateARPU(totalRevenueForPeriod[i], numberOfUsersForPeriod[i]);
+        
+        if (typeof result === "number") {
+          console.log("Average Revenue Per User (ARPU):", result);
+          ARPURes[i] = result;
+        } else {
+          console.error(result); 
+          ARPURes[i] = null;
+        }
       }
+
+      const chartLabels = ARPURes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1196,11 +1251,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const averageRevenuePerUserCtx = document.getElementById('averageRevenuePerUser').getContext('2d');
-      createChart(averageRevenuePerUserCtx, 'pie', ['Total Revenue', 'Number of Users'], [totalRevenue, numberOfUsers], 'Average Revenue Per User');
+      createChart(averageRevenuePerUserCtx, 'pie', chartLabels, ARPURes, 'Average Revenue Per User');
     })
     
     function calculateLTVtoCACRatio(clv, cac) {
-      // Validate inputs (optional, but recommended)
       if (typeof clv !== "number" || typeof cac !== "number") {
         return "Invalid input: CLV and CAC must be numbers.";
       }
@@ -1209,30 +1263,30 @@ async function processData() {
         return "Invalid input: CAC cannot be zero.";
       }
     
-      // Calculate LTV to CAC ratio
-      const ltvToCacRatio = clv / cac;
-    
-      return ltvToCacRatio;
-    }
-    
-    // Example usage:
-    
-    
+      return clv / cac;
+     }
+        
     CLVCARButton.addEventListener('click', ()=>{
-      const ltvToCacRatioResult = calculateLTVtoCACRatio(
-        customerLifetimeValue,
-        customerAcquisitionCost
-      );
-      
-      if (typeof ltvToCacRatioResult === "number") {
-        console.log(
-          "Customer Lifetime Value to Customer Acquisition Cost Ratio:",
-          ltvToCacRatioResult
+      for(let i = 0; i < customerLifetimeValue.length; i++) {
+        const result = calculateLTVtoCACRatio(
+          customerLifetimeValue[i],
+          customerAcquisitionCost[i]
         );
-      } else {
-        console.error(ltvToCacRatioResult); // Display error message if inputs were invalid
+        
+        if (typeof result === "number") {
+          console.log(
+            "Customer Lifetime Value to Customer Acquisition Cost Ratio:",
+            result
+          );
+          LTVtoCACRatioRes[i] = result;
+        } else {
+          console.error(result); 
+          LTVtoCACRatioRes[i] = null;
+        }
       }
-    
+
+      const chartLabels = LTVtoCACRatioRes.map((value, index) => `Value ${index + 1}`);
+
       const card = document.createElement('div')
       card.classList.add('canvas-container')
       const canvas = document.createElement('canvas')
@@ -1243,14 +1297,13 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const customerLifetimeValueToCustomerAcquisitionCostCtx = document.getElementById('customerLifetimeValueToCustomerAcquisitionCost').getContext('2d');
-      createChart(customerLifetimeValueToCustomerAcquisitionCostCtx, 'bubble', ['Customer Lifetime Value', 'Customer Acquisition Cost'], [customerLifetimeValue, customerAcquisitionCost], 'Customer Lifetime Value to Customer Acquisition Cost Ratio');
+      createChart(customerLifetimeValueToCustomerAcquisitionCostCtx, 'line', chartLabels, LTVtoCACRatioRes, 'Customer Lifetime Value to Customer Acquisition Cost Ratio');
     })
     
     function calculateInventoryTurnoverRate(
       costOfGoodsSold,
       averageInventoryValue
     ) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof costOfGoodsSold !== "number" ||
         typeof averageInventoryValue !== "number"
@@ -1262,24 +1315,26 @@ async function processData() {
         return "Invalid input: Average inventory value cannot be zero.";
       }
     
-      // Calculate inventory turnover rate
-      const inventoryTurnoverRate = (costOfGoodsSold / averageInventoryValue) * 100;
-    
-      return inventoryTurnoverRate;
+      return (costOfGoodsSold / averageInventoryValue) * 100;
     }
-    
-    
+  
     ITRButton.addEventListener('click', ()=>{
-      const inventoryTurnoverRateResult = calculateInventoryTurnoverRate(
-        costOfGoodsSold,
-        averageInventoryValue
-      );
-      
-      if (typeof inventoryTurnoverRateResult === "number") {
-        console.log("Inventory Turnover Rate:", inventoryTurnoverRateResult + "%");
-      } else {
-        console.error(inventoryTurnoverRateResult); // Display error message if inputs were invalid
+      for(let i = 0; i < costOfGoodsSold.length; i++) {
+        const result = calculateInventoryTurnoverRate(
+          costOfGoodsSold[i],
+          averageInventoryValue[i]
+        );
+
+        if (typeof result === "number") {
+          console.log("Inventory Turnover Rate:", result + "%");
+          InventoryTurnoverRateRes[i] = result;
+        } else {
+          console.error(result); 
+          InventoryTurnoverRateRes[i] = null;
+        }
       }
+
+      const chartLabels = InventoryTurnoverRateRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1291,26 +1346,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const inventoryTurnvoerRateCtx = document.getElementById('inventoryTurnvoerRate').getContext('2d');
-      createChart(inventoryTurnvoerRateCtx, 'scatter', ['Cost of Goods Sold', 'Average Inventory Value'], [costOfGoodsSold, averageInventoryValue], 'Inventory Turnover');
+      createChart(inventoryTurnvoerRateCtx, 'scatter',chartLabels, InventoryTurnoverRateRes, 'Inventory Turnover');
     })
-    
-    
-    // // On order placement:
-    // const orderPlacementTime = Date.now();
-    
-    // // ... (order processing and fulfillment logic) ...
-    
-    // // On order delivery:
-    // const orderDeliveryTime = Date.now();
-    
-    // // Calculate fulfillment cycle time
-    // const cycleTimeInMillis = orderDeliveryTime - orderPlacementTime;
-    // const cycleTimeInHours = cycleTimeInMillis / (1000 * 60 * 60); // Convert to hours
-    
-    // console.log("Order Fulfillment Cycle Time (hours):", cycleTimeInHours);
-    
+  
     function calculateOrderDefectRate(ordersWithDefects, totalOrders) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof ordersWithDefects !== "number" ||
         typeof totalOrders !== "number"
@@ -1322,25 +1361,26 @@ async function processData() {
         return "Invalid input: Total number of orders cannot be zero.";
       }
     
-      // Calculate order defect rate
-      const defectRate = (ordersWithDefects / totalOrders) * 100;
-    
-      return defectRate;
+      return (ordersWithDefects / totalOrders) * 100;
     }
     
-    
-    
     ODRButton.addEventListener('click', ()=>{
-      const defectRateResult = calculateOrderDefectRate(
-        ordersWithDefects,
-        totalOrders
-      );
-      
-      if (typeof defectRateResult === "number") {
-        console.log("Order Defect Rate:", defectRateResult + "%");
-      } else {
-        console.error(defectRateResult); // Display error message if inputs were invalid
+      for(let i = 0; i < ordersWithDefects.length; i++) {
+        const result = calculateOrderDefectRate(
+          ordersWithDefects[i],
+          totalOrders[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Order Defect Rate:", result + "%");
+          OrderDefectRateRes[i] = result;
+        } else {
+          console.error(result); 
+          OrderDefectRateRes[i] = null;
+        }
       }
+
+      const chartLabels = OrderDefectRateRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1352,11 +1392,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const orderDefectRateCtx = document.getElementById('orderDefectRate').getContext('2d');
-      createChart(orderDefectRateCtx, 'radar', ['Orders with Defects', 'Total Orders'], [ordersWithDefects, totalOrders], 'Order Defect rate');
+      createChart(orderDefectRateCtx, 'radar', chartLabels, OrderDefectRateRes, 'Order Defect rate');
     })
     
     function calculateRevenuePerEmployee(totalRevenue, numberOfEmployees) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof totalRevenue !== "number" ||
         typeof numberOfEmployees !== "number"
@@ -1368,23 +1407,26 @@ async function processData() {
         return "Invalid input: Number of employees cannot be zero.";
       }
     
-      // Calculate revenue per employee
-      const revenuePerEmployee = totalRevenue / numberOfEmployees;
-    
-      return revenuePerEmployee;
-    }
+      return totalRevenue / numberOfEmployees;
+      }
     
     RPEButton.addEventListener('click', ()=>{
-      const revenuePerEmployeeResult = calculateRevenuePerEmployee(
-        totalRevenue,
-        numberOfEmployees
-      );
-      
-      if (typeof revenuePerEmployeeResult === "number") {
-        console.log("Revenue Per Employee:", revenuePerEmployeeResult);
-      } else {
-        console.error(revenuePerEmployeeResult); // Display error message if inputs were invalid
+      for(let i = 0; i < totalRevenue.length; i++) {
+        const result = calculateRevenuePerEmployee(
+          totalRevenue[i],
+          numberOfEmployees[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Revenue Per Employee:", result);
+          RevenuePerEmployeeRes[i] = result;
+        } else {
+          console.error(result); 
+          RevenuePerEmployeeRes[i] = null;
+        }
       }
+
+      const chartLabels = RevenuePerEmployeeRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1396,11 +1438,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const revenuePerEmployeeCtx = document.getElementById('revenuePerEmployee').getContext('2d');
-      createChart(revenuePerEmployeeCtx, 'area', ['Revenue', 'Number of Employees'], [revenue, numberOfEmployees], 'Revenue Per Employee');
+      createChart(revenuePerEmployeeCtx, 'line', chartLabels, RevenuePerEmployeeRes, 'Revenue Per Employee');
     })
     
-    function calculateOperatingProfitMargin(operatingIncomeForProfitMargin, revenueForProfitMargin) {
-      // Validate inputs (optional, but recommended)
+    function calculateOperatingProfitMargin(operatingIncome, revenue) {
       if (typeof operatingIncome !== "number" || typeof revenue !== "number") {
         return "Invalid input: Operating income and revenue must be numbers.";
       }
@@ -1409,25 +1450,27 @@ async function processData() {
         return "Invalid input: Revenue cannot be zero.";
       }
     
-      // Calculate operating profit margin
-      const operatingProfitMargin = (operatingIncome / revenue) * 100;
+      return (operatingIncome / revenue) * 100;
     
-      return operatingProfitMargin;
     }
     
-    
-    
     OPMButton.addEventListener('click', ()=>{
-      const operatingProfitMarginResult = calculateOperatingProfitMargin(
-        operatingIncome,
-        revenue
-      );
-      
-      if (typeof operatingProfitMarginResult === "number") {
-        console.log("Operating Profit Margin:", operatingProfitMarginResult + "%");
-      } else {
-        console.error(operatingProfitMarginResult); // Display error message if inputs were invalid
+      for(let i = 0; i < operatingIncome.length; i++) {
+        const result = calculateOperatingProfitMargin(
+          operatingIncome[i],
+          revenue[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Operating Profit Margin:", result + "%");
+          OperatingProfitMarginRes[i] = result;
+        } else {
+          console.error(result); 
+          OperatingProfitMarginRes[i] = null;
+        }
       }
+
+      const chartLabels = OperatingProfitMarginRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1439,11 +1482,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const operatingProfitMarginCtx = document.getElementById('operatingProfitMargin').getContext('2d');
-      createChart(operatingProfitMarginCtx, 'doughnut', ['Operating Income', 'Depreciation & Amortization'], [operatingIncome, depreciationAmortization], 'Operating Profit Margin');
+      createChart(operatingProfitMarginCtx, 'doughnut', chartLabels, OperatingProfitMarginRes, 'Operating Profit Margin');
     })
     
     function calculateEBITDA(operatingIncome, depreciationAmortization) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof operatingIncome !== "number" ||
         typeof depreciationAmortization !== "number"
@@ -1451,25 +1493,26 @@ async function processData() {
         return "Invalid input: Operating income and depreciation & amortization must be numbers.";
       }
     
-      // Calculate EBITDA
-      const ebitda = operatingIncome + depreciationAmortization;
-    
-      return ebitda;
+      return operatingIncome + depreciationAmortization;
     }
     
-    
-    
     EBITDAButton.addEventListener('click', ()=>{
-      const ebitdaResult = calculateEBITDA(operatingIncome, depreciationAmortization);
-      
-      if (typeof ebitdaResult === "number") {
-        console.log(
-          "Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA):",
-          ebitdaResult
-        );
-      } else {
-        console.error(ebitdaResult); // Display error message if inputs were invalid
+      for(let i = 0; i < operatingIncome.length; i++) {
+        const result = calculateEBITDA(operatingIncome[i], depreciationAmortization[i]);
+        
+        if (typeof result === "number") {
+          console.log(
+            "Earnings Before Interest, Taxes, Depreciation, and Amortization (EBITDA):",
+            result
+          );
+          EBITDARes[i] = result;
+        } else {
+          console.error(result);
+          EBITDARes[i] = null;
+        }
       }
+
+      const chartLabels = EBITDARes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1481,11 +1524,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const earningsBeforeInterestTaxesDepreciationaAmortizationCtx = document.getElementById('earningsBeforeInterestTaxesDepreciationaAmortization').getContext('2d');
-      createChart(earningsBeforeInterestTaxesDepreciationaAmortizationCtx, 'bar', ['Cash from Operations', 'Capital Expenditures'], [cashFromOperations, capitalExpenditures], 'Earnings Before Interest, Taxes, Depreciation, and Amortization');
+      createChart(earningsBeforeInterestTaxesDepreciationaAmortizationCtx, 'bar', chartLabels, EBITDARes, 'Earnings Before Interest, Taxes, Depreciation, and Amortization');
     })
     
     function calculateFreeCashFlow(cashFromOperations, capitalExpenditures) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof cashFromOperations !== "number" ||
         typeof capitalExpenditures !== "number"
@@ -1493,25 +1535,26 @@ async function processData() {
         return "Invalid input: Cash from operations and capital expenditures must be numbers.";
       }
     
-      // Calculate free cash flow
-      const freeCashFlow = cashFromOperations - capitalExpenditures;
-    
-      return freeCashFlow;
+      return cashFromOperations - capitalExpenditures;
     }
     
-    
-    
     FCFButton.addEventListener('click', ()=>{
-      const freeCashFlowResult = calculateFreeCashFlow(
-        cashFromOperations,
-        capitalExpenditures
-      );
-      
-      if (typeof freeCashFlowResult === "number") {
-        console.log("Free Cash Flow:", freeCashFlowResult);
-      } else {
-        console.error(freeCashFlowResult); // Display error message if inputs were invalid
+      for(let i = 0; i < cashFromOperations.length; i++) {
+        const result = calculateFreeCashFlow(
+          cashFromOperations[i],
+          capitalExpenditures[i]
+        );
+        
+        if (typeof result === "number") {
+          console.log("Free Cash Flow:", result);
+          FreeCashFlowRes[i] = result;
+        } else {
+          console.error(result); 
+          FreeCashFlowRes[i] = null;
+        }
       }
+
+      const chartLabels = FreeCashFlowRes.map((value, index) => `Value ${index + 1}`);
     
       const card = document.createElement('div')
       card.classList.add('canvas-container')
@@ -1523,11 +1566,10 @@ async function processData() {
       document.getElementById('main-content').appendChild(card)
     
       const freeCashFlowCtx = document.getElementById('freeCashFlow').getContext('2d');
-      createChart(freeCashFlowCtx, 'line', ['Cash from Operations', 'Capital Expenditures'], [cashFromOperations, capitalExpenditures], 'Free Cash Flow');
+      createChart(freeCashFlowCtx, 'line', chartLabels, FreeCashFlowRes, 'Free Cash Flow');
     })
     
     function calculateDebtToEquityRatio(totalLiabilities, totalShareholdersEquity) {
-      // Validate inputs (optional, but recommended)
       if (
         typeof totalLiabilities !== "number" ||
         typeof totalShareholdersEquity !== "number"
@@ -1539,31 +1581,22 @@ async function processData() {
         return "Invalid input: Total shareholders' equity cannot be zero.";
       }
     
-      // Calculate debt-to-equity ratio
       const debtToEquityRatio = totalLiabilities / totalShareholdersEquity;
     
       return debtToEquityRatio;
     }
     
+    // const debtToEquityRatioResult = calculateDebtToEquityRatio(
+    //   totalLiabilities,
+    //   totalShareholdersEquity
+    // );
     
-    
-    const debtToEquityRatioResult = calculateDebtToEquityRatio(
-      totalLiabilities,
-      totalShareholdersEquity
-    );
-    
-    if (typeof debtToEquityRatioResult === "number") {
-      console.log("Debt-to-Equity Ratio:", debtToEquityRatioResult);
-    } else {
-      console.error(debtToEquityRatioResult); // Display error message if inputs were invalid
-    }
-    
-
-    console.log(
-      typeof(costOfGoodsSoldForGross), population, targetMarketPercentage, benefits, costs, averageMonthlyRevenuePerUser, averageUserLifespanInMonths, grossMargin, profit, percentChangeInQuantityDemanded, percentChangeInPrice, sellingPrice, variableCost, marketingCosts, numberOfNewCustomers, clv, averageRetention, numberOfLostCustomers, totalNumberOfCustomers, yourCompanyMetric, industryMetric, revenue, costOfGoodsSold, totalRevenue, numberOfOrders, marketingSpend, retainedCustomers, initialCustomers, percentPromoters, percentDetractors, completedActions, totalVisitors, percentSatisfied, percentDissatisfied, revenueFromAds, costOfAdSpend, totalClicks, numberOfUsers, cac, averageInventoryValue, ordersWithDefects, totalOrders, numberOfEmployees, operatingIncome, depreciationAmortization, cashFromOperations, capitalExpenditures, totalLiabilities, totalShareholdersEquity, TotalCosts, TotalNumberOfNewCustomers, percentSatisfiedCustomers, percentDissatisfiedCustomers, yourCompanyConversionRate, industryAverageConversionRate, customerLifetimeValue, customerAcquisitionCost, totalRevenueForPeriod, numberOfUsersForPeriod, completedPurchasesFromEmail, totalEmailClicks
-    )
+    // if (typeof debtToEquityRatioResult === "number") {
+    //   console.log("Debt-to-Equity Ratio:", debtToEquityRatioResult);
+    // } else {
+    //   console.error(debtToEquityRatioResult); // Display error message if inputs were invalid
+    // }
   } catch (error) {
     console.error("Error fetching or parsing data:", error);
   }
 }
-
