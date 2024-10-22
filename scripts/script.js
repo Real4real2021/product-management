@@ -228,8 +228,6 @@ function createChart(ctx, type, labels, data, label) {
   });
 }
 
-// Scroll animation and search functionality
-
 const header = document.querySelector('header');
 const logo = document.querySelector('.logo');
 const searchContainer = document.getElementById('filter-search-container');
@@ -254,7 +252,6 @@ window.addEventListener('scroll', () => {
     searchContainer.style.transform = 'translateY(0)';
   }
 
-  // Show search results if filters are not in view
   if (filters.getBoundingClientRect().bottom < 0) {
     searchResults.style.display = 'block';
   } else {
@@ -264,7 +261,6 @@ window.addEventListener('scroll', () => {
   lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
 });
 
-// Search functionality
 filterSearch.addEventListener('input', (e) => {
   const searchTerm = e.target.value.toLowerCase();
   const filterButtons = document.querySelectorAll('.filter-buttons');
@@ -291,7 +287,6 @@ filterSearch.addEventListener('input', (e) => {
   }
 });
 
-// Close search results when clicking outside
 document.addEventListener('click', (e) => {
   if (!searchContainer.contains(e.target)) {
     searchResults.style.display = 'none';
@@ -374,7 +369,7 @@ async function processData() {
       operatingIncomeForProfitMargin.push(Number(Data.operatingIncomeForProfitMargin))
       revenueForProfitMargin.push(Number(Data.revenueForProfitMargin))
     })
-
+    
     function estimateMarketSize(population, targetMarketPercentage) {
 
       if (
